@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import getConfig from 'next/config';
 import Layout from '../components/Layout';
-import { LegoSet } from '../types/LegoSet.d';
+import { LegoSet } from '../types/LegoSet';
 
 const { publicRuntimeConfig } = getConfig();
 

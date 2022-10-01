@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { groupBy } from 'lodash';
-import { LegoSet } from '../types/LegoSet.d';
+import { LegoSet } from '../types/LegoSet';
 
 export default function LeftNav({
   legoSets

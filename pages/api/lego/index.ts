@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import getConfig from 'next/config';
 import { google } from 'googleapis';
-import { LegoSet } from '../../types/LegoSet.d';
+import { LegoSet } from '../../../types/LegoSet';
 
 const { serverRuntimeConfig } = getConfig();
 
