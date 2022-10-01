@@ -28,16 +28,12 @@ main {
 }
 
 #nav {
-  padding-bottom: 10010px;
-  margin-bottom: -10000px;
   float: left;
-  width: 230px;
-  margin-left: -100%;
+  width: 300px;
   background-color: rgb(32, 29, 72);
-  min-height: calc(100vh - 85px);
+  min-height: calc(100vh - 75px);
   color: white;
   /* background: repeat url(https://149359637.v2.pressablecdn.com/wp-content/uploads/2021/05/Lego-Wallpaper-About-Murals.jpg); */
-
 }
 
 #container {
@@ -50,11 +46,12 @@ main {
 }
 
 #content {
-  margin-left: 230px; /* Same as 'nav' width */
+  margin-left: 300px; /* Same as 'nav' width */
+  padding: 24px;
 }
 
 .innertube {
-  margin: 15px; /* Padding for content */
+  margin: 15px;
   margin-top: 0;
 }
 
