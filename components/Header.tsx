@@ -10,7 +10,7 @@ export default function Header() {
         src="/lego-logo.png"
         alt="Lego Logo"
       />
-      <div className="title">JAVIEN'S LEGO SETS</div>
+      <div className="title">JAVIEN&apos;S LEGO SETS</div>
 		</header>
   );
 }
