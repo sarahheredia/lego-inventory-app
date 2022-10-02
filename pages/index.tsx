@@ -42,7 +42,7 @@ const StatsTable = (props: Props) => {
   return (
     <TableContainer component={Paper}>
       <CardContent>
-        <Typography variant="h3" component="h1" gutterBottom>
+        <Typography variant="h4" component="h4" gutterBottom>
           Stats
         </Typography>
       </CardContent>
@@ -110,7 +110,7 @@ const Home: NextPage = (props: any) => {
       >
         <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginBottom: '24px' }}>
           <CardContent>
-            <Typography variant="h3" component="h1" gutterBottom>
+            <Typography variant="h4" component="h4" gutterBottom>
               I created this website to document a fun project to organize our Lego so that we can rebuild the sets.
               They have all been sitting in a big bin for years making them nearly impossible to rebuild.
               Fortunately we kept all of the instruction manuals so we are setting out on an adventure to rebuild all of the sets.
