@@ -46,9 +46,6 @@ export default function SetList({ legoSets }: Props) {
                       <Typography>Released: <strong>{set.year}</strong></Typography>
                       <Typography>Pieces: <strong>{set.pieces}</strong></Typography>
                       <Typography>Minifigs: <strong>{set.minifigs}</strong></Typography>
-                      {set.notes && (
-                        <Typography>Notes: <strong>{set.notes}</strong></Typography>
-                      )}
                     </Card>
                   </a>
                 </Grid>
