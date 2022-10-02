@@ -15,7 +15,6 @@ const ResponsiveAppBar = ({ children }: any) => {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-
           <a href="/" style={{height: '55px'}}>
             <Image
               height="55px"
@@ -25,7 +24,6 @@ const ResponsiveAppBar = ({ children }: any) => {
             />
           </a>
         </IconButton>
-
       </Toolbar>
     </AppBar>
   );
