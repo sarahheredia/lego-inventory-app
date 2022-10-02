@@ -68,6 +68,7 @@ body {
 #home {
   padding: 12px;
   margin-top: 48px;
+  margin-bottom: 48px;
   display: flex;
   justify-content: center;
 }
