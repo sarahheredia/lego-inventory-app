@@ -1,23 +1,34 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router'
+import getConfig from 'next/config';
 import {
   Box,
   Breadcrumbs,
   Card,
   Container,
-  Grid,
   Link,
   Typography,
 } from '@mui/material';
+import Carousel from 'react-material-ui-carousel';
 import { LegoSet } from '../../types/LegoSet.d';
+
+const { publicRuntimeConfig } = getConfig();
 
 type Props = {
   legoSets: Array<LegoSet>;
+  photos: Array<string>;
+  setNumber: number;
 };
 
-export default function SetDetails({ legoSets }: Props) {
-  const router = useRouter();
-  const set = legoSets.filter(set => set.number === Number(router.query.number))[0];
+export async function getServerSideProps(ctx: any) {
+  const setNumber = ctx.query.number;
+  const response = await fetch(`${publicRuntimeConfig.basePath}/api/photos?filter=${setNumber}`);
+  const photos = await response.json();
+  return { props: { setNumber, photos } };
+}
+
+export default function SetDetails({ legoSets, photos, setNumber }: Props) {
+  const set = legoSets.filter(set => set.number === Number(setNumber))[0];
+
   return (
     <>
       <Head>
@@ -40,7 +51,7 @@ export default function SetDetails({ legoSets }: Props) {
           </Breadcrumbs>
         </Card>
 
-        <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginTop: '24px', padding: '24px' }}>
+        <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginTop: '24px', padding: '24px', marginBottom: '24px' }}>
           <Typography variant="h2" gutterBottom>{set.name}</Typography>
           <Box
             sx={{
@@ -70,6 +81,18 @@ export default function SetDetails({ legoSets }: Props) {
             <Typography variant="h5" gutterBottom>Notes: <strong>{set.notes}</strong></Typography>
           )}
         </Card>
+
+        {photos.length && (
+          <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '100%', textAlign: 'center', paddingBottom: '24px', marginBottom: '24px'}}>
+            <Typography variant="h2" gutterBottom>OUR PHOTOS</Typography>
+
+            <Carousel>
+              {photos.map( (url: string, i: number) =>
+                <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} alt={`Lego Set Photo ${i}`} />
+              )}
+            </Carousel>
+          </Card>
+        )}
       </Container>
     </>
   )
