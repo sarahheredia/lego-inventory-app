@@ -1,33 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import getConfig from 'next/config';
-import { google } from 'googleapis';
-import { LegoSet } from '../../../types/LegoSet';
-
-const { serverRuntimeConfig } = getConfig();
-
-const credentials = JSON.parse(
-  Buffer.from(serverRuntimeConfig.googleServiceKey, "base64").toString()
-);
-const auth = new google.auth.GoogleAuth({
-  credentials,
-  scopes: 'https://www.googleapis.com/auth/spreadsheets',
-});
+import { getValues } from '../../../libs/googleSheets';
+import { LegoSet } from '../../../types/LegoSet.d';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Array<LegoSet>>
 ) {
-  const client = await auth.getClient();
-  const sheets = google.sheets({
-    version: 'v4',
-    auth: client,
-  });
-  const rows = await sheets.spreadsheets.values.get({
-    auth,
-    spreadsheetId: serverRuntimeConfig.spreadsheetId,
-    range: 'Lego Sets',
-  });
-  const data: Array<LegoSet> = rows.data.values!.map(row => {
+  const values = await getValues('Lego Sets');
+  const data: Array<LegoSet> = values!.map((row: Array<string>) => {
     return {
       series: row[0],
       year: Number(row[1]),
