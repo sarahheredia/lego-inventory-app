@@ -34,10 +34,10 @@ export default async function handler(
       number: Number(row[2]),
       numInstructionManuals: Number(row[3]),
       name: row[4],
-      pieces: Number(row[6]),
-      numMinifigs: Number(row[7]),
-      bagged: Boolean(row[8]),
-      inDisplay: Boolean(row[9]),
+      pieces: Number(row[5]),
+      numMinifigs: Number(row[6]),
+      bagged: Boolean(row[7]),
+      inDisplay: Boolean(row[8]),
     };
   });
 
