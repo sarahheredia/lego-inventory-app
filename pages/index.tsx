@@ -40,7 +40,7 @@ const StatsTable = (props: Props) => {
   }
 
   return (
-    <TableContainer component={Paper} style={{ border: 'rgb(32, 29, 72) solid 24px'}}>
+    <TableContainer component={Paper} style={{ border: 'rgb(32, 29, 72) solid 24px', maxWidth: '50%'}}>
       <CardContent>
         <Typography variant="h4" component="h4" gutterBottom>
           Stats
@@ -62,8 +62,14 @@ const StatsTable = (props: Props) => {
               }))
           ].map(({name, value}) => (
             <TableRow key={name}>
-              <TableCell>{name}</TableCell>
-              <TableCell style={{textAlign: 'right'}}>{value}</TableCell>
+              <TableCell>
+                <Box
+                  sx={{display: 'flex', flexDirection: 'column', textAlign: 'center'}}
+                >
+                  {name}
+                  <strong>{value}</strong>
+                </Box>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
