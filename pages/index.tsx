@@ -1,4 +1,4 @@
-import { sumBy, minBy, maxBy, countBy } from 'lodash';
+import { sumBy, minBy, maxBy, countBy, groupBy } from 'lodash';
 import * as React from 'react';
 import type { NextPage } from 'next';
 import {
@@ -52,6 +52,7 @@ const StatsTable = (props: Props) => {
         <TableBody>
           {[
               { name: 'Total Sets', value: legoSets.length },
+              { name: 'Total Series', value: Object.keys(groupBy(legoSets, (set: LegoSet) => set.series)).length },
               { name: 'Total Pieces Count', value: sumBy(legoSets, set => set.pieces) },
               { name: 'Total Minifigs', value: sumBy(legoSets, set => set.numMinifigs) },
               { name: 'Sets Reassembled', value: bagged },
