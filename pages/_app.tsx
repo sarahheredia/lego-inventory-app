@@ -18,7 +18,7 @@ MyApp.getInitialProps = async () => {
 
 function MyApp({ Component, pageProps }: AppProps & { pageProps: { legoSets: Array<LegoSet> } }) {
   return (
-    <Layout legoSets={pageProps.legoSets}>
+    <Layout>
       <Component {...pageProps} />
     </Layout>
   )
