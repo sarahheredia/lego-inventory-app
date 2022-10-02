@@ -1,18 +1,25 @@
-import React from 'react'
+import Link from 'next/link';
+import { groupBy } from 'lodash';
+import { LegoSet } from '../types/LegoSet';
 
-export default function LeftNav() {
+export default function LeftNav({
+  legoSets
+ }: {
+  legoSets: Array<LegoSet>;
+}) {
+  const series = groupBy(legoSets, (set: LegoSet) => set.series);
   return (
     <nav id="nav">
-				<div className="innertube">
-					<h3>Left heading</h3>
-					<ul>
-						<li><a href="#">Link 1</a></li>
-						<li><a href="#">Link 2</a></li>
-						<li><a href="#">Link 3</a></li>
-						<li><a href="#">Link 4</a></li>
-						<li><a href="#">Link 5</a></li>
-					</ul>
-				</div>
-			</nav>
-  )
+      <div className="innertube">
+        <h3>LEGO Series</h3>
+        <ul>
+          {Object.entries(series).map(([seriesName, sets]) =>
+            <li key={seriesName}>
+              <Link  href={`/series/${seriesName}`}><a>{seriesName} ({sets.length})</a></Link>
+            </li>
+          )}
+        </ul>
+      </div>
+    </nav>
+  );
 }
