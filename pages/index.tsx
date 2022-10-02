@@ -63,7 +63,7 @@ const StatsTable = (props: Props) => {
           ].map(({name, value}) => (
             <TableRow key={name}>
               <TableCell>{name}</TableCell>
-              <TableCell>{value}</TableCell>
+              <TableCell style={{textAlign: 'right'}}>{value}</TableCell>
             </TableRow>
           ))}
         </TableBody>
