@@ -7,7 +7,7 @@ import { LegoSet } from '../types/LegoSet';
 const { publicRuntimeConfig } = getConfig();
 
 MyApp.getInitialProps = async () => {
-  const response = await fetch(`${publicRuntimeConfig.host}/api/lego`);
+  const response = await fetch(`${publicRuntimeConfig.basePath}/api/lego`);
   const legoSets = await response.json();
   return {
     pageProps: {

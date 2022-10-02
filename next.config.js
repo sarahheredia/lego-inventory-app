@@ -7,7 +7,7 @@ const nextConfig = {
     spreadsheetId: process.env.SPREADSHEET_ID,
   },
   publicRuntimeConfig: {
-    host: process.env.VERCEL_URL,
+    basePath: `http${process.env.VERCEL_ENV === 'development' ? '' : 's'}://${process.env.VERCEL_URL}`,
   },
 }
 
