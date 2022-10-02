@@ -1,6 +1,7 @@
 import { sumBy, minBy, maxBy, countBy, groupBy } from 'lodash';
 import * as React from 'react';
 import getConfig from 'next/config';
+import Head from 'next/head';
 import {
   Box,
   Card,
@@ -11,8 +12,6 @@ import {
 } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
 import { LegoSet } from '../types/LegoSet';
-import Head from 'next/head';
-
 
 type LegoSetProps = {
   legoSets: Array<LegoSet>;
@@ -43,7 +42,10 @@ const Stats = (props: LegoSetProps) => {
   }
 
   return (
-    <Container component={Paper} style={{ border: 'rgb(32, 29, 72) solid 24px', maxWidth: '50%', marginBottom: '24px'}}>
+    <Container
+      component={Paper}
+      style={{ border: 'rgb(32, 29, 72) solid 24px', maxWidth: '50%', marginBottom: '24px'}}
+    >
       <CardContent>
         <Typography variant="h4" component="h4" gutterBottom style={{textAlign: 'center'}}>
           Stats
@@ -55,7 +57,7 @@ const Stats = (props: LegoSetProps) => {
           { name: 'Total Sets', value: legoSets.length },
           { name: 'Total Series', value: Object.keys(groupBy(legoSets, (set: LegoSet) => set.series)).length },
           { name: 'Total Pieces Count', value: sumBy(legoSets, set => set.pieces) },
-          { name: 'Total Minifigs', value: sumBy(legoSets, set => set.numMinifigs) },
+          { name: 'Total Minifigs', value: sumBy(legoSets, set => set.minifigs) },
           { name: 'Sets Reassembled', value: bagged },
           { name: 'Sets to Reassemble', value: legoSets.length - bagged },
           { name: 'Fewest Pieces', value: fewest.pieces },
