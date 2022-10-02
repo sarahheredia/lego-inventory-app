@@ -1,8 +1,24 @@
+import getConfig from 'next/config';
 import { groupBy } from 'lodash';
 import { LegoSet } from '../../types/LegoSet';
 
 type Props = {
   legoSets: Array<LegoSet>;
+}
+
+const { serverRuntimeConfig } = getConfig();
+
+export async function getServerSideProps() {
+  const response = await fetch('https://rebrickable.com/api/v3/lego/sets?search=4504', {
+    headers: {
+      authorization: `key ${serverRuntimeConfig.rebrickableApiKey}`,
+    }
+  });
+  const data = await response.json();
+  console.log('data', data);
+  return {
+    props: {}, // will be passed to the page component as props
+  }
 }
 
 export default function SeriesList({ legoSets }: Props) {
