@@ -10,7 +10,6 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <title>Lego Inventory</title>
           <link rel="shortcut icon" href="/favicon.ico" />
           <link
             rel="stylesheet"

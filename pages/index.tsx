@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
 import { LegoSet } from '../types/LegoSet';
+import Head from 'next/head';
 
 type Props = {
   legoSets: Array<LegoSet>;
@@ -80,35 +81,40 @@ const StatsTable = (props: Props) => {
 
 const Home: NextPage = (props: any) => {
   return (
-    <Container maxWidth="lg">
-      <Box
-        sx={{
-          my: 4,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexDirection: 'column',
-        }}
-      >
-        <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginBottom: '24px' }}>
-          <CardContent>
-            <Typography variant="h4" component="h4" gutterBottom>
-              I created this website to document a fun project to organize our Lego so that we can rebuild the sets.
-              They have all been sitting in a big bin for years making them nearly impossible to rebuild.
-              Fortunately we kept all of the instruction manuals so we are setting out on an adventure to rebuild all of the sets.
-            </Typography>
-          </CardContent>
-        </Card>
+    <>
+      <Head>
+        <title>Home</title>
+      </Head>
+      <Container maxWidth="lg">
+        <Box
+          sx={{
+            my: 4,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
+        >
+          <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginBottom: '24px' }}>
+            <CardContent>
+              <Typography variant="h4" component="h4" gutterBottom>
+                I created this website to document a fun project to organize our Lego so that we can rebuild the sets.
+                They have all been sitting in a big bin for years making them nearly impossible to rebuild.
+                Fortunately we kept all of the instruction manuals so we are setting out on an adventure to rebuild all of the sets.
+              </Typography>
+            </CardContent>
+          </Card>
 
-        <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '300px', marginBottom: '24px'}}>
-          <Carousel>
-            {images.map( (url, i) => <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} /> )}
-          </Carousel>
-        </Card>
+          <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '300px', marginBottom: '24px'}}>
+            <Carousel>
+              {images.map( (url, i) => <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} /> )}
+            </Carousel>
+          </Card>
 
-        <StatsTable legoSets={props.legoSets} />
-      </Box>
-    </Container>
+          <StatsTable legoSets={props.legoSets} />
+        </Box>
+      </Container>
+    </>
   );
 };
 
