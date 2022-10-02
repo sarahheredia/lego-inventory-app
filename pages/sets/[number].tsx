@@ -18,7 +18,6 @@ type Props = {
 export default function SetDetails({ legoSets }: Props) {
   const router = useRouter();
   const set = legoSets.filter(set => set.number === Number(router.query.number))[0];
-  console.log(set);
   return (
     <>
       <Head>
