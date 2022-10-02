@@ -24,11 +24,11 @@ export default function Home({ legoSets }: Props) {
   return (
     <div id="home">
       <div id="inner">
-        <p id="intro">
+        <h3 id="intro">
           I created this website to document a fun project to organize our Lego so that we can rebuild the sets.
           They have all been sitting in a big bin for years making them nearly impossible to rebuild.
           Fortunately we kept all of the instruction manuals so we are setting out on an adventure to rebuild all of the sets.
-        </p>
+        </h3>
 
         <table id="stats">
           <tbody>
