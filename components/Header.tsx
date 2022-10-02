@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function Header() {
   return (
     <header id="header">
-      <Link href="/">
+      <Link href="/" passHref>
         <a>
           <Image
             height="55px"

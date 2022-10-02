@@ -14,7 +14,9 @@ export default function SeriesList({ legoSets }: Props) {
         <ul>
           {Object.entries(series).map(([seriesName, sets]) =>
             <li key={seriesName}>
-              <Link  href={`/series/${seriesName}`}><a>{seriesName} ({sets.length})</a></Link>
+              <Link href={`/series/${seriesName}`} passHref>
+                <a>{seriesName} ({sets.length})</a>
+              </Link>
             </li>
           )}
         </ul>
