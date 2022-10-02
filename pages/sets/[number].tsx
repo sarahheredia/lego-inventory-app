@@ -46,8 +46,8 @@ export default function SetDetails({ legoSets }: Props) {
           <Box
             sx={{
               display: 'flex',
-              // height: '600px',
               justifyContent: 'center',
+              marginBottom: '48px',
             }}
           >
             {set.boxImage && (
