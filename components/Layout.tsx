@@ -4,11 +4,10 @@ import { LegoSet } from '../types/LegoSet';
 import Header from './Header';
 
 type Props = {
-  legoSets: Array<LegoSet>;
   children: JSX.Element,
 }
 
-export default function Layout({ children, legoSets }: Props) {
+export default function Layout({ children }: Props) {
   return (
     <div id="container">
       <Head>
