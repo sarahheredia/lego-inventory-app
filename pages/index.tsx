@@ -40,7 +40,7 @@ const StatsTable = (props: Props) => {
     .true;
   }
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} style={{ border: 'rgb(32, 29, 72) solid 24px'}}>
       <CardContent>
         <Typography variant="h4" component="h4" gutterBottom>
           Stats
@@ -124,9 +124,9 @@ const Home: NextPage = (props: any) => {
           </Carousel>
         </Card>
 
-        <Card style={{ border: 'rgb(32, 29, 72) solid 24px'}}>
+        {/* <Card style={{ border: 'rgb(32, 29, 72) solid 24px'}}> */}
           <StatsTable legoSets={props.legoSets} />
-        </Card>
+        {/* </Card> */}
       </Box>
     </Container>
   );
