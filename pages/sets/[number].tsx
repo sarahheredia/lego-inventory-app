@@ -83,7 +83,17 @@ export default function SetDetails({ legoSets, photos, setNumber }: Props) {
         </Card>
 
         {photos.length && (
-          <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '100%', textAlign: 'center', paddingBottom: '24px', marginBottom: '24px'}}>
+          <Card
+            style={{
+              border: 'rgb(32, 29, 72) solid 24px',
+              maxWidth: '50%',
+              maxHeight: '50%',
+              textAlign: 'center',
+              marginBottom: '24px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
             <Typography variant="h2" gutterBottom>OUR PHOTOS</Typography>
 
             <Carousel>
