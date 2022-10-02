@@ -45,7 +45,7 @@ export default function SetDetails({ legoSets, photos, setNumber }: Props) {
               color="inherit"
               href="/sets"
             >
-              Sets
+              SETS
             </Link>
             <Typography color="text.primary">{set.name}</Typography>
           </Breadcrumbs>
