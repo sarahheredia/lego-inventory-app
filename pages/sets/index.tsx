@@ -50,8 +50,8 @@ export default function SeriesList({ legoSets }: Props) {
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="center">
             {legoSets.map((set: LegoSet, index: number) => {
               return (
-                <Grid item>
-                  <Card key={set.name} style={{padding: '8px', backgroundColor: 'rgb(32, 29, 72)', color: 'white', minWidth: '200px'}}>
+                <Grid item key={set.name}>
+                  <Card style={{padding: '8px', backgroundColor: 'rgb(32, 29, 72)', color: 'white', minWidth: '200px'}}>
                     <div><strong>{set.name}</strong></div>
                     <div>Number: <strong>{set.number}</strong></div>
                     <div>Series: <strong>{set.series}</strong></div>
