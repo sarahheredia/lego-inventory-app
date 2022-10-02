@@ -13,6 +13,10 @@ body {
   background-color: rgb(255, 207, 0);
   padding-left: 24px;
   padding-right: 24px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999;
 }
 
 #header .title {
@@ -29,11 +33,10 @@ main {
 
 #nav {
   float: left;
-  width: 300px;
+  flex: 0 0 300px;
   background-color: rgb(32, 29, 72);
-  min-height: calc(100vh - 75px);
+  height: 100%;
   color: white;
-  /* background: repeat url(https://149359637.v2.pressablecdn.com/wp-content/uploads/2021/05/Lego-Wallpaper-About-Murals.jpg); */
 }
 
 #container {
@@ -42,12 +45,93 @@ main {
 }
 
 #wrapper {
-  overflow: hidden;
+  position: relative;
+  top: 75px;
+  display: flex;
+  height: calc(100vh + 12px);
 }
 
 #content {
-  margin-left: 300px; /* Same as 'nav' width */
+  margin-left: 300px;
+  height: calc(100vh - 75px);
+}
+
+body {
+  background: repeat url(https://149359637.v2.pressablecdn.com/wp-content/uploads/2021/05/Lego-Wallpaper-About-Murals.jpg);
+}
+
+#home {
+  padding: 75px;
+  display: flex;
+  justify-content: center;
+}
+
+#home #inner {
+  background-color: white;
   padding: 24px;
+  border:rgb(32, 29, 72) solid 24px;
+}
+
+.row {
+  padding-right: 12px;
+  padding-left: 12px;
+  font-weight: bolder;
+}
+
+.row:nth-child(even) {
+  background: rgb(0, 168, 79);
+}
+.row:nth-child(odd) {
+  background: rgb(3245, 125, 32);
+}
+
+#inner {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 750px;
+}
+
+#inner #imageContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  height: 250px;
+  width: 100%;
+  position: relative;
+}
+
+#inner #imageContainer .image {
+  position: relative;
+  height: 250px;
+  width: 100%;
+}
+
+#inner #intro {
+  background-color: rgb(32, 29, 72);
+  color: white;
+  padding: 24px;
+  text-align: center;
+  font-size: 24px;
+  line-height: 1.25em;
+}
+
+#inner #stats {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+#inner td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#inner tr:nth-child(even){background-color: #f2f2f2;}
+
+#inner tr:hover {background-color: #ddd;}
+
+#inner .value {
+  text-align: right;
 }
 
 .innertube {

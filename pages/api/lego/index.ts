@@ -36,8 +36,9 @@ export default async function handler(
       name: row[4],
       pieces: Number(row[5]),
       numMinifigs: Number(row[6]),
-      bagged: Boolean(row[7]),
-      inDisplay: Boolean(row[8]),
+      bagged: row[7]==='TRUE',
+      displayed: row[8]==='TRUE',
+      notes: row[9],
     };
   });
 
