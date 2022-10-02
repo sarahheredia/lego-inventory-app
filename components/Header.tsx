@@ -1,11 +1,14 @@
 import * as React from 'react';
 import Image from 'next/image';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+} from '@mui/material';
 
-const ResponsiveAppBar = ({ children }: any) => {
+const Header = () => {
   return (
     <AppBar position="sticky">
       <Toolbar>
@@ -15,7 +18,7 @@ const ResponsiveAppBar = ({ children }: any) => {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-          <a href="/" style={{height: '55px'}}>
+          <a href="/">
             <Image
               height="55px"
               width="55px"
@@ -24,8 +27,24 @@ const ResponsiveAppBar = ({ children }: any) => {
             />
           </a>
         </IconButton>
+
+        <Typography
+          variant="h6"
+          noWrap
+          component="a"
+          href="/sets"
+          sx={{
+            mr: 2,
+            display: { xs: 'none', md: 'flex' },
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            letterSpacing: '.3rem',
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
+        >SETS</Typography>
       </Toolbar>
     </AppBar>
   );
 };
-export default ResponsiveAppBar;
+export default Header;

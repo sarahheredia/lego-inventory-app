@@ -5,9 +5,11 @@ export type LegoSet = {
   numInstructionManuals: number;
   name: string;
   pieces: number;
-  numMinifigs: number;
+  minifigs: number;
   bagged: boolean;
   displayed: boolean;
   complete: boolean;
   notes?: string;
+  boxImage: string;
+  setImage: string;
 }

@@ -15,11 +15,13 @@ export default async function handler(
       numInstructionManuals: Number(row[3]),
       name: row[4],
       pieces: Number(row[5]),
-      numMinifigs: Number(row[6]),
+      minifigs: Number(row[6]),
       bagged: row[7]==='TRUE',
       displayed: row[8]==='TRUE',
       complete: row[9]==='TRUE',
       notes: row[10],
+      boxImage: row[11],
+      setImage: row[12],
     };
   });
 
