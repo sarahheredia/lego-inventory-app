@@ -19,7 +19,7 @@ MyApp.getInitialProps = async () => {
     pageProps: {
       legoSets,
     }
-  }
+  };
 };
 
 interface MyAppProps extends AppProps {
