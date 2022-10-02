@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import { LegoSet } from '../types/LegoSet';
 import Header from './Header';
 
 type Props = {
