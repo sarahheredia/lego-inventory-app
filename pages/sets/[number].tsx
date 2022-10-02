@@ -45,6 +45,7 @@ export default function SetDetails({ legoSets }: Props) {
           <Box
             sx={{
               display: 'flex',
+              flexDirection: { xs: 'column', sm: 'column', md: 'row' },
               justifyContent: 'center',
               marginBottom: '48px',
             }}
