@@ -1,6 +1,5 @@
 import { sumBy, minBy, maxBy, countBy, groupBy } from 'lodash';
 import * as React from 'react';
-import type { NextPage } from 'next';
 import getConfig from 'next/config';
 import {
   Box,
@@ -28,11 +27,7 @@ const { publicRuntimeConfig } = getConfig();
 export async function getServerSideProps() {
   const response = await fetch(`${publicRuntimeConfig.basePath}/api/photos?filter=progress`);
   const photos = await response.json();
-  return {
-    props: {
-      photos,
-    },
-  }
+  return { props: { photos } };
 }
 
 const Stats = (props: LegoSetProps) => {
@@ -82,7 +77,7 @@ const Stats = (props: LegoSetProps) => {
   );
 }
 
-const Home: NextPage = (props: Props) => {
+const Home = (props: Props) => {
   return (
     <>
       <Head>
