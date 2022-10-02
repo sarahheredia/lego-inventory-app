@@ -47,7 +47,7 @@ const StatsTable = (props: Props) => {
         </Typography>
       </CardContent>
 
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table>
         <TableBody>
           {[
               { name: 'Total Sets', value: legoSets.length },
@@ -61,7 +61,7 @@ const StatsTable = (props: Props) => {
                 return { name: `Sets with less than ${pieces} pieces`, value: getCountByPieces(arr[index-1] ?? 0, pieces)}
               }))
           ].map(({name, value}) => (
-            <TableRow key={name} style={{minWidth: 'unset'}}>
+            <TableRow key={name}>
               <TableCell>{name}</TableCell>
               <TableCell>{value}</TableCell>
             </TableRow>

@@ -12,7 +12,6 @@ import Header from '../components/Header';
 const clientSideEmotionCache = createEmotionCache();
 const { publicRuntimeConfig } = getConfig();
 
-
 MyApp.getInitialProps = async () => {
   const response = await fetch(`${publicRuntimeConfig.basePath}/api/lego`);
   const legoSets = await response.json();
@@ -35,7 +34,6 @@ export default function MyApp(props: MyAppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <Header />
         <Component {...pageProps} />
