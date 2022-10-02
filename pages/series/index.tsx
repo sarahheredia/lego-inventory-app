@@ -9,7 +9,7 @@ type Props = {
 export default function SeriesList({ legoSets }: Props) {
   const series = groupBy(legoSets, (set: LegoSet) => set.series);
   return (
-    <div id="home">
+    <div id="page">
       <div id="inner" style={{textAlign: 'center'}}>
         <ul>
           {Object.entries(series).map(([seriesName, sets]) =>

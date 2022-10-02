@@ -5,6 +5,10 @@ export default function LegoSeries(props: NextPage) {
   const router = useRouter();
 
   return (
-    <h1>Lego Series for {router.query.name}</h1>
+    <div id="page">
+      <div id="inner" style={{textAlign: 'center'}}>
+        <h1>Info about {router.query.name} Sets</h1>
+      </div>
+    </div>
   )
 }
