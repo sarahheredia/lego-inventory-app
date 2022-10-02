@@ -7,11 +7,6 @@ import {
   CardContent,
   Container,
   Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
   Typography,
 } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
@@ -28,7 +23,7 @@ const images = [
   'https://lh3.googleusercontent.com/sn0jHI2qnL2wR6rGUpL7jjcbUvOMfnYcG3k6QEYy4ZNo6Bkqyc9RFBnHCFtRqElbrwbmyRma31i3-LHJC9_3X-o0Blw7dmw8dCErzhFRzzAuP8k8CW_g6O3sm9Vqxgpud-s6cst0XAM=w2400',
 ];
 
-const StatsTable = (props: Props) => {
+const Stats = (props: Props) => {
   const legoSets = props.legoSets;
   const bagged = sumBy(legoSets, set => +set.bagged);
   const fewest = minBy(legoSets, set => set.pieces) as LegoSet;
@@ -41,42 +36,36 @@ const StatsTable = (props: Props) => {
   }
 
   return (
-    <TableContainer component={Paper} style={{ border: 'rgb(32, 29, 72) solid 24px', maxWidth: '50%'}}>
+    <Container component={Paper} style={{ border: 'rgb(32, 29, 72) solid 24px', maxWidth: '50%', marginBottom: '24px'}}>
       <CardContent>
-        <Typography variant="h4" component="h4" gutterBottom>
+        <Typography variant="h4" component="h4" gutterBottom style={{textAlign: 'center'}}>
           Stats
         </Typography>
       </CardContent>
 
-      <Table>
-        <TableBody>
-          {[
-              { name: 'Total Sets', value: legoSets.length },
-              { name: 'Total Series', value: Object.keys(groupBy(legoSets, (set: LegoSet) => set.series)).length },
-              { name: 'Total Pieces Count', value: sumBy(legoSets, set => set.pieces) },
-              { name: 'Total Minifigs', value: sumBy(legoSets, set => set.numMinifigs) },
-              { name: 'Sets Reassembled', value: bagged },
-              { name: 'Sets to Reassemble', value: legoSets.length - bagged },
-              { name: 'Fewest Pieces', value: fewest.pieces },
-              { name: 'Most Pieces', value: most.pieces },
-              ...(pieceCount.map((pieces, index, arr) => {
-                return { name: `Sets with less than ${pieces} pieces`, value: getCountByPieces(arr[index-1] ?? 0, pieces)}
-              }))
+      <Carousel>
+        {[
+            { name: 'Total Sets', value: legoSets.length },
+            { name: 'Total Series', value: Object.keys(groupBy(legoSets, (set: LegoSet) => set.series)).length },
+            { name: 'Total Pieces Count', value: sumBy(legoSets, set => set.pieces) },
+            { name: 'Total Minifigs', value: sumBy(legoSets, set => set.numMinifigs) },
+            { name: 'Sets Reassembled', value: bagged },
+            { name: 'Sets to Reassemble', value: legoSets.length - bagged },
+            { name: 'Fewest Pieces', value: fewest.pieces },
+            { name: 'Most Pieces', value: most.pieces },
+            ...(pieceCount.map((pieces, index, arr) => {
+              return { name: `Sets with less than ${pieces} pieces`, value: getCountByPieces(arr[index-1] ?? 0, pieces)}
+            }))
           ].map(({name, value}) => (
-            <TableRow key={name}>
-              <TableCell>
-                <Box
-                  sx={{display: 'flex', flexDirection: 'column', textAlign: 'center'}}
-                >
-                  {name}
-                  <strong>{value}</strong>
-                </Box>
-              </TableCell>
-            </TableRow>
+            <Box
+              sx={{display: 'flex', flexDirection: 'column', textAlign: 'center'}}
+            >
+              {name}
+              <strong>{value}</strong>
+            </Box>
           ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+      </Carousel>
+    </Container>
   );
 }
 
@@ -106,13 +95,13 @@ const Home: NextPage = (props: any) => {
             </CardContent>
           </Card>
 
-          <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '300px', marginBottom: '24px'}}>
+          <Stats legoSets={props.legoSets} />
+
+          <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '300px'}}>
             <Carousel>
               {images.map( (url, i) => <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} /> )}
             </Carousel>
           </Card>
-
-          <StatsTable legoSets={props.legoSets} />
         </Box>
       </Container>
     </>
