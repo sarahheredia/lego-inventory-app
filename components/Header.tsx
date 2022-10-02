@@ -29,22 +29,20 @@ const Header = () => {
         </IconButton>
 
         <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            <a href="/sets" style={{textDecoration: 'none', color: 'rgb(32, 29, 72)'}}>SETS</a>
-        </Typography>
+          variant="h6"
+          noWrap
+          component="a"
+          href="/sets"
+          sx={{
+            mr: 2,
+            display: { xs: 'none', md: 'flex' },
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            letterSpacing: '.3rem',
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
+        >SETS</Typography>
       </Toolbar>
     </AppBar>
   );

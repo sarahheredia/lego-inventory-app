@@ -20,6 +20,8 @@ export default async function handler(
       displayed: row[8]==='TRUE',
       complete: row[9]==='TRUE',
       notes: row[10],
+      boxImage: row[11],
+      setImage: row[12],
     };
   });
 

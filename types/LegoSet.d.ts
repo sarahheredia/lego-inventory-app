@@ -10,4 +10,6 @@ export type LegoSet = {
   displayed: boolean;
   complete: boolean;
   notes?: string;
+  boxImage: string;
+  setImage: string;
 }
