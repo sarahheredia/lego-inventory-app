@@ -2,9 +2,11 @@ import Head from 'next/head';
 import { useRouter } from 'next/router'
 import {
   Box,
+  Breadcrumbs,
   Card,
   Container,
   Grid,
+  Link,
   Typography,
 } from '@mui/material';
 import { LegoSet } from '../../types/LegoSet.d';
@@ -23,6 +25,22 @@ export default function SetDetails({ legoSets }: Props) {
         <title>{set.name}</title>
       </Head>
       <Container maxWidth="lg">
+        <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginTop: '24px', padding: '24px' }}>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" href="/">
+              HOME
+            </Link>
+            <Link
+              underline="hover"
+              color="inherit"
+              href="/sets"
+            >
+              Sets
+            </Link>
+            <Typography color="text.primary">{set.name}</Typography>
+          </Breadcrumbs>
+        </Card>
+
         <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginTop: '24px', padding: '24px' }}>
           <Typography variant="h2" gutterBottom>{set.name}</Typography>
           <Box
