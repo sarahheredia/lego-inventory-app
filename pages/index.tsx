@@ -38,6 +38,7 @@ const StatsTable = (props: Props) => {
       set.pieces > min && set.pieces <= max)
     .true;
   }
+
   return (
     <TableContainer component={Paper} style={{ border: 'rgb(32, 29, 72) solid 24px'}}>
       <CardContent>
@@ -48,45 +49,21 @@ const StatsTable = (props: Props) => {
 
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableBody>
-          <TableRow>
-            <TableCell>Total Sets</TableCell>
-            <TableCell>{legoSets.length}</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell>Total Pieces Combined</TableCell>
-            <TableCell>{sumBy(legoSets, set => set.pieces)}</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell>Total Minifigs</TableCell>
-            <TableCell>{sumBy(legoSets, set => set.numMinifigs)}</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell>Total Sets on Display</TableCell>
-            <TableCell>{sumBy(legoSets, set => +set.displayed)}</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell>Total Sets on Left to Bag</TableCell>
-            <TableCell>{legoSets.length - bagged}</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell>Set with Fewest Piece</TableCell>
-            <TableCell>{fewest.pieces}</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell>Set with Most Pieces</TableCell>
-            <TableCell>{most.pieces}</TableCell>
-          </TableRow>
-
-          {pieceCount.map((pieces, index, arr) => (
-            <TableRow key={pieces}>
-              <TableCell>Sets with less than {pieces} pieces</TableCell>
-              <TableCell>{getCountByPieces(arr[index-1] ?? 0, pieces)}</TableCell>
+          {[
+              { name: 'Total Sets', value: legoSets.length },
+              { name: 'Total Pieces Count', value: sumBy(legoSets, set => set.pieces) },
+              { name: 'Total Minifigs', value: sumBy(legoSets, set => set.numMinifigs) },
+              { name: 'Sets Reassembled', value: bagged },
+              { name: 'Sets to Reassemble', value: legoSets.length - bagged },
+              { name: 'Fewest Pieces', value: fewest.pieces },
+              { name: 'Most Pieces', value: most.pieces },
+              ...(pieceCount.map((pieces, index, arr) => {
+                return { name: `Sets with less than ${pieces} pieces`, value: getCountByPieces(arr[index-1] ?? 0, pieces)}
+              }))
+          ].map(({name, value}) => (
+            <TableRow key={name}>
+              <TableCell>{name}</TableCell>
+              <TableCell>{value}</TableCell>
             </TableRow>
           ))}
         </TableBody>
