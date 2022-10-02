@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { groupBy } from 'lodash';
 import { LegoSet } from '../../types/LegoSet';
 
@@ -14,9 +13,7 @@ export default function SeriesList({ legoSets }: Props) {
         <ul>
           {Object.entries(series).map(([seriesName, sets]) =>
             <li key={seriesName}>
-              <Link href={`/series/${seriesName}`} passHref>
-                <a>{seriesName} ({sets.length})</a>
-              </Link>
+              <a href={`/series/${seriesName}`}><span>{seriesName} ({sets.length})</span></a>
             </li>
           )}
         </ul>
