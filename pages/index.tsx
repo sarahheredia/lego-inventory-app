@@ -45,25 +45,26 @@ const Stats = (props: Props) => {
 
       <Carousel>
         {[
-            { name: 'Total Sets', value: legoSets.length },
-            { name: 'Total Series', value: Object.keys(groupBy(legoSets, (set: LegoSet) => set.series)).length },
-            { name: 'Total Pieces Count', value: sumBy(legoSets, set => set.pieces) },
-            { name: 'Total Minifigs', value: sumBy(legoSets, set => set.numMinifigs) },
-            { name: 'Sets Reassembled', value: bagged },
-            { name: 'Sets to Reassemble', value: legoSets.length - bagged },
-            { name: 'Fewest Pieces', value: fewest.pieces },
-            { name: 'Most Pieces', value: most.pieces },
-            ...(pieceCount.map((pieces, index, arr) => {
-              return { name: `Sets with less than ${pieces} pieces`, value: getCountByPieces(arr[index-1] ?? 0, pieces)}
-            }))
-          ].map(({name, value}) => (
-            <Box
-              sx={{display: 'flex', flexDirection: 'column', textAlign: 'center'}}
-            >
-              {name}
-              <strong>{value}</strong>
-            </Box>
-          ))}
+          { name: 'Total Sets', value: legoSets.length },
+          { name: 'Total Series', value: Object.keys(groupBy(legoSets, (set: LegoSet) => set.series)).length },
+          { name: 'Total Pieces Count', value: sumBy(legoSets, set => set.pieces) },
+          { name: 'Total Minifigs', value: sumBy(legoSets, set => set.numMinifigs) },
+          { name: 'Sets Reassembled', value: bagged },
+          { name: 'Sets to Reassemble', value: legoSets.length - bagged },
+          { name: 'Fewest Pieces', value: fewest.pieces },
+          { name: 'Most Pieces', value: most.pieces },
+          ...(pieceCount.map((pieces, index, arr) => {
+            return { name: `Sets with less than ${pieces} pieces`, value: getCountByPieces(arr[index-1] ?? 0, pieces)}
+          }))
+        ].map(({name, value}) => (
+          <Box
+            key={name}
+            sx={{display: 'flex', flexDirection: 'column', textAlign: 'center'}}
+          >
+            {name}
+            <strong>{value}</strong>
+          </Box>
+        ))}
       </Carousel>
     </Container>
   );
@@ -88,7 +89,7 @@ const Home: NextPage = (props: any) => {
           <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginBottom: '24px' }}>
             <CardContent>
               <Typography variant="h4" component="h4" gutterBottom>
-                I created this website to document a fun project to organize our Lego so that we can rebuild the sets.
+                I created this website to document a fun project to organize our Lego.
                 They have all been sitting in a big bin for years making them nearly impossible to rebuild.
                 Fortunately we kept all of the instruction manuals so we are setting out on an adventure to rebuild all of the sets.
               </Typography>
@@ -99,7 +100,7 @@ const Home: NextPage = (props: any) => {
 
           <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '300px'}}>
             <Carousel>
-              {images.map( (url, i) => <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} /> )}
+              {images.map( (url, i) => <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} alt={`Lego Progress Photo ${i}`} /> )}
             </Carousel>
           </Card>
         </Box>
