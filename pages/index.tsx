@@ -98,7 +98,7 @@ const Home: NextPage = (props: any) => {
 
           <Stats legoSets={props.legoSets} />
 
-          <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '300px'}}>
+          <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '100%'}}>
             <Carousel>
               {images.map( (url, i) => <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} alt={`Lego Progress Photo ${i}`} /> )}
             </Carousel>
