@@ -24,6 +24,11 @@ body {
   margin-left: 24px;
 }
 
+#header .title a {
+  text-decoration: none;
+  color: black;
+}
+
 main {
   padding-bottom: 10010px;
   margin-bottom: -10000px;
@@ -95,7 +100,6 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 24px;
-  height: 250px;
   width: 100%;
   position: relative;
 }
@@ -143,7 +147,7 @@ p {
   color: #555;
 }
 
-nav ul {
+ul {
   list-style-type: none;
   margin: 0;
   padding: 0;

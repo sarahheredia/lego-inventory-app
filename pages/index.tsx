@@ -30,16 +30,6 @@ export default function Home({ legoSets }: Props) {
           Fortunately we kept all of the instruction manuals so we are setting out on an adventure to rebuild all of the sets.
         </p>
 
-        <div id="imageContainer">
-          {images.map((url, index) => (
-            <img
-              referrerPolicy="no-referrer"
-              key={url}
-              src={url}
-            />
-          ))}
-        </div>
-
         <table id="stats">
           <tbody>
             <tr>

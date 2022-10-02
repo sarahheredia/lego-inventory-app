@@ -1,17 +1,16 @@
 import Link from 'next/link';
 import { groupBy } from 'lodash';
-import { LegoSet } from '../types/LegoSet';
+import { LegoSet } from '../../types/LegoSet';
 
-export default function LeftNav({
-  legoSets
- }: {
+type Props = {
   legoSets: Array<LegoSet>;
-}) {
+}
+
+export default function SeriesList({ legoSets }: Props) {
   const series = groupBy(legoSets, (set: LegoSet) => set.series);
   return (
-    <nav id="nav">
-      <div className="innertube">
-        <h3>LEGO Series</h3>
+    <div id="home">
+      <div id="inner">
         <ul>
           {Object.entries(series).map(([seriesName, sets]) =>
             <li key={seriesName}>
@@ -20,6 +19,6 @@ export default function LeftNav({
           )}
         </ul>
       </div>
-    </nav>
+    </div>
   );
 }
