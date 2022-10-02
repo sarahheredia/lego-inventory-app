@@ -1,6 +1,6 @@
 import { sumBy, minBy, maxBy, countBy, groupBy } from 'lodash';
 import * as React from 'react';
-import type { NextPage } from 'next';
+import getConfig from 'next/config';
 import {
   Box,
   Card,
@@ -13,17 +13,24 @@ import Carousel from 'react-material-ui-carousel';
 import { LegoSet } from '../types/LegoSet';
 import Head from 'next/head';
 
-type Props = {
+
+type LegoSetProps = {
   legoSets: Array<LegoSet>;
 }
 
-const images = [
-  'https://lh3.googleusercontent.com/iE9yK4NIxFeuRCVDd4kCIY-X09AEvwvVkv7qYBmU2aHK3SX6WMLSvbMwk1BEBp4Rv0V1DH3tsoIIHzeacfdc1wRzqcWoSFR2O-MaOCv-ay-6LsBnQM-NslmpEEPuf7zigJ9ZzgHmNqc=w2400',
-  'https://lh3.googleusercontent.com/o8CxvFvDKGDtel3eZC4n7_8d7MqKtceX18Gia4O_MyQrB9PkIR3EFyTU3yVKPlKhHkL_4ZIO0wyb8s6wEooWLaoRpM2_kCmEe6KczsQtnSThcXgy4O45kUsItNtLTgcDBA4051YOAjU=w2400',
-  'https://lh3.googleusercontent.com/sn0jHI2qnL2wR6rGUpL7jjcbUvOMfnYcG3k6QEYy4ZNo6Bkqyc9RFBnHCFtRqElbrwbmyRma31i3-LHJC9_3X-o0Blw7dmw8dCErzhFRzzAuP8k8CW_g6O3sm9Vqxgpud-s6cst0XAM=w2400',
-];
+type Props = LegoSetProps & {
+  photos: Array<string>;
+}
 
-const Stats = (props: Props) => {
+const { publicRuntimeConfig } = getConfig();
+
+export async function getServerSideProps() {
+  const response = await fetch(`${publicRuntimeConfig.basePath}/api/photos?filter=progress`);
+  const photos = await response.json();
+  return { props: { photos } };
+}
+
+const Stats = (props: LegoSetProps) => {
   const legoSets = props.legoSets;
   const bagged = sumBy(legoSets, set => +set.bagged);
   const fewest = minBy(legoSets, set => set.pieces) as LegoSet;
@@ -70,7 +77,7 @@ const Stats = (props: Props) => {
   );
 }
 
-const Home: NextPage = (props: any) => {
+const Home = (props: Props) => {
   return (
     <>
       <Head>
@@ -100,7 +107,7 @@ const Home: NextPage = (props: any) => {
 
           <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '100%'}}>
             <Carousel>
-              {images.map( (url, i) => <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} alt={`Lego Progress Photo ${i}`} /> )}
+              {props.photos.map( (url: string, i: number) => <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} alt={`Lego Progress Photo ${i}`} /> )}
             </Carousel>
           </Card>
         </Box>
