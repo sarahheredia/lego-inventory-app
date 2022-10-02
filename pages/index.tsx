@@ -61,7 +61,7 @@ const StatsTable = (props: Props) => {
                 return { name: `Sets with less than ${pieces} pieces`, value: getCountByPieces(arr[index-1] ?? 0, pieces)}
               }))
           ].map(({name, value}) => (
-            <TableRow key={name}>
+            <TableRow key={name} style={{minWidth: 'unset'}}>
               <TableCell>{name}</TableCell>
               <TableCell>{value}</TableCell>
             </TableRow>
