@@ -29,7 +29,7 @@ export default function SeriesList({ legoSets }: Props) {
                   <Card style={{padding: '8px', backgroundColor: 'rgb(32, 29, 72)', color: 'white', minWidth: '200px'}}>
                     {set.boxImage && (
                     <div>
-                      <img referrerPolicy="no-referrer" style={{height: '100px'}} src={set.boxImage} alt={`Box image for set ${set.number}`} />
+                      <img referrerPolicy="no-referrer" style={{height: '160px'}} src={set.boxImage} alt={`Box image for set ${set.number}`} />
                     </div>)}
                     <div><strong>{set.name}</strong></div>
                     <div>Number: <strong>{set.number}</strong></div>
