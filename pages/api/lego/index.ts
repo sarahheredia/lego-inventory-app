@@ -18,7 +18,8 @@ export default async function handler(
       numMinifigs: Number(row[6]),
       bagged: row[7]==='TRUE',
       displayed: row[8]==='TRUE',
-      notes: row[9],
+      complete: row[9]==='TRUE',
+      notes: row[10],
     };
   });
 
