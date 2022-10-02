@@ -15,7 +15,12 @@ export default function Header() {
           />
         </a>
       </Link>
-      <div className="title">JAVIEN&apos;S LEGO SETS</div>
+
+      <div className="title">
+        <Link href="/series">
+          <a>SERIES</a>
+        </Link>
+      </div>
 		</header>
   );
 }

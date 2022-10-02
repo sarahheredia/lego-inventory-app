@@ -7,5 +7,6 @@ export type LegoSet = {
   pieces: number;
   numMinifigs: number;
   bagged: boolean;
-  inDisplay: boolean;
+  displayed: boolean;
+  notes?: string;
 }
