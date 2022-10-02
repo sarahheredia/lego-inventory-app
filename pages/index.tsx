@@ -15,7 +15,6 @@ import {
   Typography,
 } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { LegoSet } from '../types/LegoSet';
 
 type Props = {
@@ -120,13 +119,11 @@ const Home: NextPage = (props: any) => {
 
         <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '300px', marginBottom: '24px'}}>
           <Carousel>
-            {images.map( (url, i) => <img style={{width: '100%'}} key={i} src={url} /> )}
+            {images.map( (url, i) => <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} /> )}
           </Carousel>
         </Card>
 
-        {/* <Card style={{ border: 'rgb(32, 29, 72) solid 24px'}}> */}
-          <StatsTable legoSets={props.legoSets} />
-        {/* </Card> */}
+        <StatsTable legoSets={props.legoSets} />
       </Box>
     </Container>
   );
