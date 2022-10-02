@@ -1,9 +1,15 @@
-import '../styles/globals.css';
-import type { AppProps } from 'next/app';
+import * as React from 'react';
+import Head from 'next/head';
 import getConfig from 'next/config';
-import Layout from '../components/Layout';
-import { LegoSet } from '../types/LegoSet';
+import { AppProps } from 'next/app';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { CacheProvider, EmotionCache } from '@emotion/react';
+import theme from '../theme';
+import createEmotionCache from '../createEmotionCache';
+import Header from '../components/Header';
 
+const clientSideEmotionCache = createEmotionCache();
 const { publicRuntimeConfig } = getConfig();
 
 MyApp.getInitialProps = async () => {
@@ -16,12 +22,22 @@ MyApp.getInitialProps = async () => {
   }
 };
 
-function MyApp({ Component, pageProps }: AppProps & { pageProps: { legoSets: Array<LegoSet> } }) {
-  return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-  )
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
 }
 
-export default MyApp
+export default function MyApp(props: MyAppProps) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  return (
+    <CacheProvider value={emotionCache}>
+      <Head>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Header />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </CacheProvider>
+  );
+}
