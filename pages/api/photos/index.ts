@@ -28,7 +28,6 @@ export default async function handler(
     range: 'Photos',
   });
   const data: Array<string> = rows.data.values!.map(row => {
-    // return row[1];
     return {
       type: row[0],
       url: row[1]
