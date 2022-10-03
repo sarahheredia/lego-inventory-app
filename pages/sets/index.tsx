@@ -97,17 +97,20 @@ export default function SetList({ legoSets, photos }: Props) {
             <AccordionDetails style={{backgroundColor: 'white', color: 'rgb(32, 29, 72)'}}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', marginLeft: '12px', marginRight: '12px' }}>
                 <FormControl>
-                  <FormLabel style={{textAlign: 'left'}}>Sort By</FormLabel>
-                  <RadioGroup
-                    row
-                    name="sorting-group"
-                    onChange={event => setSort(event.target.value)}
-                  >
+                  <FormLabel style={{textAlign: 'left'}}>
+                    Sort By
                     <TableSortLabel
                       active
                       direction={sortDirection}
                       onClick={() => setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')}
                     />
+                  </FormLabel>
+                  <RadioGroup
+                    row
+                    name="sorting-group"
+                    onChange={event => setSort(event.target.value)}
+                  >
+
                     <FormControlLabel value="pieces" control={<Radio />} label="Pieces" checked={sort === 'pieces'} />
                     <FormControlLabel value="complete" control={<Radio />} label="Complete" checked={sort === 'complete'} />
                     <FormControlLabel value="series" control={<Radio />} label="Series" checked={sort === 'series'} />
