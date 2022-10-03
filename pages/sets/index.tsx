@@ -170,14 +170,18 @@ export default function SetList({ legoSets, photos }: Props) {
                       <Typography color="text.primary">
                         <img referrerPolicy="no-referrer" style={{height: '160px'}} src={set.boxImage} alt={`Box image for set ${set.number}`} />
                       </Typography>)}
-                      <Typography>Number: <strong>{set.number}</strong></Typography>
-                      <Typography>Series: <strong>{set.series}</strong></Typography>
-                      <Typography>Released: <strong>{set.year}</strong></Typography>
-                      <Typography>Pieces: <strong>{set.pieces}</strong></Typography>
-                      <Typography>Complete: <strong>{set.complete ? 'Yes' : 'No'}</strong></Typography>
-                      <Typography>Bagged: <strong>{set.bagged ? 'Yes' : 'No'}</strong></Typography>
-                      <Typography>Minifigs: <strong>{set.minifigs}</strong></Typography>
-                      <Typography>Photos: <strong>{set.photoCount}</strong></Typography>
+                      {[
+                        { name: 'Number', value: set.number },
+                        { name: 'Series', value: set.series },
+                        { name: 'Released', value: set.year },
+                        { name: 'Pieces', value: set.pieces },
+                        { name: 'Complete', value: set.complete ? 'Yes' : 'No' },
+                        { name: 'Bagged', value: set.bagged ? 'Yes' : 'No' },
+                        { name: 'Minifigs', value: set.minifigs },
+                        { name: 'Photos', value: set.photoCount },
+                      ].map(({name, value}) => {
+                        return <Typography key={name}>{name}: <strong>{value}</strong></Typography>;
+                      })}
                     </Card>
                   </a>
                 </Grid>
