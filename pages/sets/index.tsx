@@ -107,7 +107,7 @@ export default function SetList({ legoSets, photos }: Props) {
                 <Grid item key={set.name}>
                   <a href={`/sets/${set.number}`} style={{ textDecoration: 'none' }}>
                     <Card style={{padding: '8px', backgroundColor: 'rgb(32, 29, 72)', color: 'white', width: '240px', height: '100%'}}>
-                      <Typography><strong>{set.name}</strong></Typography>
+                      <Typography style={{ marginBottom: '8px' }}><strong>{set.name}</strong></Typography>
                       {set.boxImage && (
                       <Typography color="text.primary">
                         <img referrerPolicy="no-referrer" style={{height: '160px'}} src={set.boxImage} alt={`Box image for set ${set.number}`} />
