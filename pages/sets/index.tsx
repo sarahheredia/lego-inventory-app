@@ -112,6 +112,7 @@ export default function SetList({ legoSets, photos }: Props) {
                       <Typography>Series: <strong>{set.series}</strong></Typography>
                       <Typography>Released: <strong>{set.year}</strong></Typography>
                       <Typography>Pieces: <strong>{set.pieces}</strong></Typography>
+                      <Typography>Complete: <strong>{set.complete ? 'Yes' : 'No'}</strong></Typography>
                       <Typography>Minifigs: <strong>{set.minifigs}</strong></Typography>
                       <Typography>Photos: <strong>{set.photoCount}</strong></Typography>
                     </Card>
