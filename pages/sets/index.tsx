@@ -117,7 +117,7 @@ export default function SetList({ legoSets, photos }: Props) {
                       <Typography>Released: <strong>{set.year}</strong></Typography>
                       <Typography>Pieces: <strong>{set.pieces}</strong></Typography>
                       <Typography>Minifigs: <strong>{set.minifigs}</strong></Typography>
-                      <Typography>Num Photos: <strong>{set.photoCount}</strong></Typography>
+                      <Typography>Photos: <strong>{set.photoCount}</strong></Typography>
                     </Card>
                   </a>
                 </Grid>
