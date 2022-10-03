@@ -5,7 +5,6 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Button,
 } from '@mui/material';
 
 const Header = () => {
