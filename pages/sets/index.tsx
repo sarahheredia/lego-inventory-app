@@ -26,10 +26,12 @@ const { publicRuntimeConfig } = getConfig();
 
 type Props = {
   legoSets: Array<LegoSet>;
-  photos: Array<{
-    for: number;
-    imageUrl: string;
-  }>
+  photos: Array<PhotoRow>
+};
+
+type SearchableLegoSet = LegoSet & {
+  photos: Array<string>;
+  photoCount: number;
 };
 
 export async function getServerSideProps() {
@@ -45,7 +47,15 @@ export default function SetList({ legoSets, photos }: Props) {
   const [sortDirection, setSortDirection] = useState<'asc'| 'desc'>('asc');
   const [hasPhotos, setHasPhotos] = useState(false);
   const photosGroup = groupBy(photos, photo => photo.for);
-  const filtered = legoSets.filter(set => {
+  const legoSetsWithPhotos: Array<SearchableLegoSet> = legoSets.map(set => {
+    const photos = (photosGroup[set.number.toString()] ?? []).map(p => p.url);
+    return {
+      ...set,
+      photos,
+      photoCount: photos.length,
+    };
+  });
+  const filtered = legoSetsWithPhotos.filter(set => {
     let match = set.searchText!.indexOf(searchText) > -1;
     return hasPhotos ? match && photosGroup[set.number.toString()] : match;
   });
@@ -82,7 +92,7 @@ export default function SetList({ legoSets, photos }: Props) {
                 <FormControlLabel value="pieces" control={<Radio />} label="Pieces" checked={sort === 'pieces'} />
                 <FormControlLabel value="series" control={<Radio />} label="Series" checked={sort === 'series'} />
                 <FormControlLabel value="year" control={<Radio />} label="Year" checked={sort === 'year'} />
-                <FormControlLabel control={<Checkbox checked={hasPhotos} onChange={() => setHasPhotos(!hasPhotos)} />} label="Has Photos" />
+                <FormControlLabel value="photoCount" control={<Radio />} label="Photo Count" checked={sort === 'photoCount'} />
               </RadioGroup>
             </FormControl>
             <TextField label={`Search ${sorted.length} sets...`} variant="outlined" onChange={(event) => setSearchText(event.target.value.toLowerCase())} style={{width: '300px'}} />
@@ -92,7 +102,7 @@ export default function SetList({ legoSets, photos }: Props) {
             {!sorted.length ? (
               <h1>No Results...</h1>
             ) :
-            sorted.map((set: LegoSet) => {
+            sorted.map((set: SearchableLegoSet) => {
               return (
                 <Grid item key={set.name}>
                   <a href={`/sets/${set.number}`} style={{ textDecoration: 'none' }}>
@@ -107,7 +117,7 @@ export default function SetList({ legoSets, photos }: Props) {
                       <Typography>Released: <strong>{set.year}</strong></Typography>
                       <Typography>Pieces: <strong>{set.pieces}</strong></Typography>
                       <Typography>Minifigs: <strong>{set.minifigs}</strong></Typography>
-                      <Typography>Num Photos: <strong>{Object.values(photosGroup[set.number.toString()] ?? {})?.length}</strong></Typography>
+                      <Typography>Num Photos: <strong>{set.photoCount}</strong></Typography>
                     </Card>
                   </a>
                 </Grid>
