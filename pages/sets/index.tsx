@@ -26,7 +26,7 @@ type Props = {
 export default function SetList({ legoSets }: Props) {
   const [searchText, setSearchText] = useState('');
   const [sort, setSort] = useState('pieces');
-  const [sortDirection, setSortDirection] = useState<'asc'| 'desc'>('asc');
+  const [sortDirection, setSortDirection] = useState<'asc'| 'desc'>('desc');
   const filtered = legoSets.filter(set => set.searchText!.indexOf(searchText) > -1);
   const sorted = orderBy(filtered, [sort], [sortDirection])
   return (
