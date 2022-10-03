@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Head from 'next/head';
-import getConfig from 'next/config';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from '@mui/material/styles';
 import { Box, Card, CircularProgress, CssBaseline, Typography } from '@mui/material';
@@ -12,7 +11,6 @@ import { LegoSet } from '../types/LegoSet.d';
 import { PhotoRow } from '../types/Photos.d';
 
 const clientSideEmotionCache = createEmotionCache();
-const { publicRuntimeConfig } = getConfig();
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -24,8 +22,8 @@ export default function MyApp(props: MyAppProps) {
 
   React.useEffect(() => {
     Promise.all([
-      fetch(`${publicRuntimeConfig.basePath}/api/lego`).then(r => r.json()),
-      fetch(`${publicRuntimeConfig.basePath}/api/photos`).then(r => r.json()),
+      fetch(`/api/lego`).then(r => r.json()),
+      fetch(`/api/photos`).then(r => r.json()),
     ]).then(([ls, p]) => {
       setLegoSets(ls);
       setPhotos(p);
