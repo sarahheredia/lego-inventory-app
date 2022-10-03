@@ -21,7 +21,6 @@ interface MyAppProps extends AppProps {
 export default function MyApp(props: MyAppProps) {
   const [legoSets, setLegoSets] = React.useState<Array<LegoSet>>([]);
   const [photos, setPhotos] = React.useState<Array<PhotoRow>>([]);
-  console.log('props', props);
 
   React.useEffect(() => {
     Promise.all([
