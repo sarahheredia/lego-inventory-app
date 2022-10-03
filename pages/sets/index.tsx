@@ -43,10 +43,10 @@ type SearchableLegoSet = LegoSet & {
 };
 
 export async function getServerSideProps() {
-  const response = await fetch(`${publicRuntimeConfig.basePath}/api/photos`);
-  const photos = await response.json();
-  const photosOfSets = photos.filter((photo: PhotoRow) => !isNaN(Number(photo.for)));
-  return { props: { photos: photosOfSets } };
+  // const response = await fetch(`${publicRuntimeConfig.basePath}/api/photos`);
+  // const photos = await response.json();
+  // const photosOfSets = photos.filter((photo: PhotoRow) => !isNaN(Number(photo.for)));
+  return { props: { photos: [] } };
 }
 
 export default function SetList({ legoSets, photos }: Props) {
