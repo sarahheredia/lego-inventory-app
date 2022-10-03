@@ -87,7 +87,6 @@ export default function SetList({ legoSets, photos }: Props) {
         </Card>
 
         <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginTop: '24px', padding: '24px', marginBottom: '24px' }}>
-
           <Accordion style={{backgroundColor: 'rgb(32, 29, 72)', color: 'white', marginLeft: '12px', marginRight: '12px', marginBottom: '24px'}}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon style={{color: 'white'}} />}
@@ -137,8 +136,6 @@ export default function SetList({ legoSets, photos }: Props) {
               </Box>
             </AccordionDetails>
           </Accordion>
-
-
 
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="center">
             {!sorted.length ? (
