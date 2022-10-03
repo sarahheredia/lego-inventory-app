@@ -44,7 +44,7 @@ const Stats = (props: LegoSetProps) => {
   return (
     <Container
       component={Paper}
-      style={{ border: 'rgb(32, 29, 72) solid 24px', maxWidth: '50%', marginBottom: '24px'}}
+      style={{ border: 'rgb(32, 29, 72) solid 24px', marginBottom: '24px'}}
     >
       <CardContent>
         <Typography variant="h4" component="h4" gutterBottom style={{textAlign: 'center'}}>
