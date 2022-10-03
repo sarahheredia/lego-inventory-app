@@ -32,6 +32,7 @@ export async function getServerSideProps() {
 const Stats = (props: LegoSetProps) => {
   const legoSets = props.legoSets;
   const bagged = sumBy(legoSets, set => +set.bagged);
+  const completed = sumBy(legoSets, set => +set.complete);
   const fewest = minBy(legoSets, set => set.pieces) as LegoSet;
   const most = maxBy(legoSets, set => set.pieces) as LegoSet;
   const pieceCount = [100, 250, 500, 750, 1000, 1250];
@@ -56,12 +57,13 @@ const Stats = (props: LegoSetProps) => {
         {[
           { name: 'Total Sets', value: legoSets.length },
           { name: 'Total Series', value: Object.keys(groupBy(legoSets, (set: LegoSet) => set.series)).length },
-          { name: 'Total Pieces Count', value: sumBy(legoSets, set => set.pieces) },
+          { name: 'Total Pieces from all Sets Combined', value: sumBy(legoSets, set => set.pieces) },
           { name: 'Total Minifigs', value: sumBy(legoSets, set => set.minifigs) },
-          { name: 'Sets Reassembled', value: bagged },
-          { name: 'Sets to Reassemble', value: legoSets.length - bagged },
-          { name: 'Fewest Pieces', value: fewest.pieces },
-          { name: 'Most Pieces', value: most.pieces },
+          { name: 'Sets Partially Reassembled', value: bagged },
+          { name: 'Sets Completely Reassembled', value: completed },
+          { name: 'Sets to Reassemble', value: legoSets.length - completed },
+          { name: 'Smallest Piece Count', value: fewest.pieces },
+          { name: 'Larged Piece Count', value: most.pieces },
           ...(pieceCount.map((pieces, index, arr) => {
             return { name: `Sets with less than ${pieces} pieces`, value: getCountByPieces(arr[index-1] ?? 0, pieces)}
           }))
