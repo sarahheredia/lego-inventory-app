@@ -44,7 +44,7 @@ export async function getServerSideProps() {
 export default function SetList({ legoSets, photos }: Props) {
   const [searchText, setSearchText] = useState('');
   const [sort, setSort] = useState('pieces');
-  const [sortDirection, setSortDirection] = useState<'asc'| 'desc'>('asc');
+  const [sortDirection, setSortDirection] = useState<'asc'| 'desc'>('desc');
   const [hasPhotos, setHasPhotos] = useState(false);
   const photosGroup = groupBy(photos, photo => photo.for);
   const legoSetsWithPhotos: Array<SearchableLegoSet> = legoSets.map(set => {
