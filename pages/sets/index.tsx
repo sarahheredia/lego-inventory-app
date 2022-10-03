@@ -87,14 +87,14 @@ export default function SetList({ legoSets, photos }: Props) {
         </Card>
 
         <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginTop: '24px', padding: '24px', marginBottom: '24px' }}>
-          <Accordion style={{backgroundColor: 'rgb(32, 29, 72)', color: 'white', marginBottom: '24px'}}>
+          <Accordion style={{backgroundColor: 'rgb(32, 29, 72)', color: 'white', marginBottom: '24px', marginLeft: '12px', marginRight: '12px'}}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon style={{color: 'white'}} />}
             >
               <Typography>Search, sort, and filter...</Typography>
             </AccordionSummary>
             <AccordionDetails style={{backgroundColor: 'white', color: 'rgb(32, 29, 72)'}}>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', marginLeft: '12px', marginRight: '12px' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <FormControl>
                   <FormLabel style={{textAlign: 'left'}}>
                     Sort By
@@ -120,7 +120,7 @@ export default function SetList({ legoSets, photos }: Props) {
                 <TextField label={`Search ${filtered.length} sets...`} variant="outlined" onChange={(event) => setSearchText(event.target.value.toLowerCase())} style={{width: '300px'}} />
               </Box>
 
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', marginLeft: '12px', marginRight: '12px' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <FormControl>
                   <FormLabel style={{textAlign: 'left'}}>Filter By</FormLabel>
                   <RadioGroup
