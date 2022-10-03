@@ -83,7 +83,7 @@ export default function SetDetails({ legoSets, photos, setNumber }: Props) {
           )}
         </Card>
 
-        {photos.length && (
+        {!!photos.length && (
           <Card
             style={{
               border: 'rgb(32, 29, 72) solid 24px',
