@@ -87,7 +87,7 @@ export default function SetList({ legoSets, photos }: Props) {
         </Card>
 
         <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginTop: '24px', padding: '24px', marginBottom: '24px' }}>
-          <Accordion style={{backgroundColor: 'rgb(32, 29, 72)', color: 'white', marginLeft: '12px', marginRight: '12px', marginBottom: '24px'}}>
+          <Accordion style={{backgroundColor: 'rgb(32, 29, 72)', color: 'white', marginBottom: '24px'}}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon style={{color: 'white'}} />}
             >
