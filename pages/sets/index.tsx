@@ -75,7 +75,7 @@ export default function SetList({ legoSets, photos }: Props) {
           </Breadcrumbs>
         </Card>
 
-        <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginTop: '24px', padding: '24px' }}>
+        <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginTop: '24px', padding: '24px', marginBottom: '24px' }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '24px', marginLeft: '12px', marginRight: '12px' }}>
             <FormControl>
               <FormLabel style={{textAlign: 'left'}}>Sort By</FormLabel>
