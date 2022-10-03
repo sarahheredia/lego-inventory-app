@@ -1,19 +1,24 @@
 import Head from 'next/head';
 import {
+  Box,
   Breadcrumbs,
   Card,
   Container,
   Grid,
   Link,
+  TextField,
   Typography,
 } from '@mui/material';
 import { LegoSet } from '../../types/LegoSet.d';
+import { useState } from 'react';
 
 type Props = {
   legoSets: Array<LegoSet>;
 };
 
 export default function SetList({ legoSets }: Props) {
+  const [searchText, setSearchText] = useState('');
+  const filtered = legoSets.filter(set => set.searchText!.indexOf(searchText) > -1);
   return (
     <>
       <Head>
@@ -30,8 +35,15 @@ export default function SetList({ legoSets }: Props) {
         </Card>
 
         <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginTop: '24px', padding: '24px' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '24px' }}>
+            <TextField label="Search" variant="outlined" onChange={(event) => setSearchText(event.target.value.toLowerCase())} style={{width: '300px'}} />
+          </Box>
+
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="center">
-            {legoSets.map((set: LegoSet) => {
+            {!filtered.length ? (
+              <h1>No Results...</h1>
+            ) :
+            filtered.map((set: LegoSet) => {
               return (
                 <Grid item key={set.name}>
                   <a href={`/sets/${set.number}`} style={{ textDecoration: 'none' }}>

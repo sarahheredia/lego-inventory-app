@@ -12,4 +12,5 @@ export type LegoSet = {
   notes?: string;
   boxImage: string;
   setImage: string;
+  searchText: string;
 }
