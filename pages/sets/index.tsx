@@ -95,7 +95,7 @@ export default function SetList({ legoSets, photos }: Props) {
                 <FormControlLabel value="photoCount" control={<Radio />} label="Photo Count" checked={sort === 'photoCount'} />
               </RadioGroup>
             </FormControl>
-            <TextField label={`Search ${sorted.length} sets...`} variant="outlined" onChange={(event) => setSearchText(event.target.value.toLowerCase())} style={{width: '300px'}} />
+            <TextField label={`Search ${legoSets.length} sets...`} variant="outlined" onChange={(event) => setSearchText(event.target.value.toLowerCase())} style={{width: '300px'}} />
           </Box>
 
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="center">
