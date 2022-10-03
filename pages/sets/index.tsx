@@ -123,7 +123,7 @@ export default function SetList({ legoSets, photos }: Props) {
                       />
                     </FormLabel>
                     <RadioGroup
-                      sx={{ row: { xs: true, sm: true, md: false }}}
+                      sx={{ row: { xs: 1, sm: 1, md: 0 }}}
                       name="sorting-group"
                       onChange={event => setSort(event.target.value)}
                     >
@@ -140,7 +140,7 @@ export default function SetList({ legoSets, photos }: Props) {
                   <FormControl>
                     <FormLabel style={{textAlign: 'left'}}>Filter By</FormLabel>
                     <RadioGroup
-                      sx={{ row: { xs: true, sm: true, md: false }}}
+                      sx={{ row: { xs: 1, sm: 1, md: 0 }}}
                       name="filtering-group"
                     >
                       <FormControlLabel value="complete" control={<Checkbox onChange={() => setAreComplete(!areComplete)} />} label="Complete Set" checked={areComplete} />
