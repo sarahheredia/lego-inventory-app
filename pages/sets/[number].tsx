@@ -10,12 +10,13 @@ import {
 } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
 import { LegoSet } from '../../types/LegoSet.d';
+import { PhotoRow } from '../../types/Photos.d';
 
 const { publicRuntimeConfig } = getConfig();
 
 type Props = {
   legoSets: Array<LegoSet>;
-  photos: Array<string>;
+  photos: Array<PhotoRow>;
   setNumber: number;
 };
 
@@ -99,8 +100,8 @@ export default function SetDetails({ legoSets, photos, setNumber }: Props) {
             <Typography variant="h2" gutterBottom>OUR PHOTOS</Typography>
 
             <Carousel>
-              {photos.map( (url: string, i: number) =>
-                <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} alt={`Lego Set Photo ${i}`} />
+              {photos.map( (photo: PhotoRow, i: number) =>
+                <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={photo.url} alt={`Lego Set Photo ${i}`} />
               )}
             </Carousel>
           </Card>
