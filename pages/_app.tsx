@@ -3,7 +3,7 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { Box, Card, CircularProgress, CssBaseline, Typography } from '@mui/material';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import theme from '../theme';
 import createEmotionCache from '../createEmotionCache';
@@ -42,8 +42,19 @@ export default function MyApp(props: MyAppProps) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header />
-        {!!legoSets.length && (
+        {!!legoSets.length ? (
           <Component {...componentProps} />
+        ): (
+          <Box display="flex" justifyContent="center" alignItems="center" style={{marginTop: '48px'}}>
+            <Card
+              sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}
+              style={{ height: '500px', width: '500px', border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginBottom: '24px' }}
+            >
+              <img style={{height: '50%'}} src="/emmett.png" alt="Emmett from Lego Movie spinner" />
+              <Typography style={{fontFamily: 'monospace', fontWeight: 700}}>Everything will be awesome soon...</Typography>
+              <CircularProgress color="warning" />
+            </Card>
+          </Box>
         )}
       </ThemeProvider>
     </CacheProvider>
