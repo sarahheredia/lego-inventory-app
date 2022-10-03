@@ -45,7 +45,6 @@ export default function SetList({ legoSets, photos }: Props) {
   const [searchText, setSearchText] = useState('');
   const [sort, setSort] = useState('pieces');
   const [sortDirection, setSortDirection] = useState<'asc'| 'desc'>('desc');
-  const [hasPhotos, setHasPhotos] = useState(false);
   const photosGroup = groupBy(photos, photo => photo.for);
   const legoSetsWithPhotos: Array<SearchableLegoSet> = legoSets.map(set => {
     const photos = (photosGroup[set.number.toString()] ?? []).map(p => p.url);
@@ -55,10 +54,7 @@ export default function SetList({ legoSets, photos }: Props) {
       photoCount: photos.length,
     };
   });
-  const filtered = legoSetsWithPhotos.filter(set => {
-    let match = set.searchText!.indexOf(searchText) > -1;
-    return hasPhotos ? match && photosGroup[set.number.toString()] : match;
-  });
+  const filtered = legoSetsWithPhotos.filter(set => set.searchText!.indexOf(searchText) > -1);
   const sorted = orderBy(filtered, [sort], [sortDirection]);
   return (
     <>
