@@ -85,10 +85,6 @@ export default function SetDetails({ legoSets, photos, setNumber }: Props) {
 
         {photos.length && (
           <Card
-            sx={{
-              maxWidth: { xs: '100%', sm: '100%', md: '50%' },
-              maxHeight: { xs: '100%', sm: '100%', md: '50%' }
-            }}
             style={{
               border: 'rgb(32, 29, 72) solid 24px',
               textAlign: 'center',
