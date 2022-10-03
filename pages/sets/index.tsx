@@ -154,7 +154,7 @@ export default function SetList({ legoSets, photos }: Props) {
             </AccordionDetails>
           </Accordion>
 
-          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="center">
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 1, sm: 2, md: 4 }} justifyContent="center">
             {!sorted.length ? (
               <h1>No Results...</h1>
             ) :
@@ -164,7 +164,10 @@ export default function SetList({ legoSets, photos }: Props) {
                   sx={{ width: { xs: '100%', sm: 'unset' } }}
                 >
                   <a href={`/sets/${set.number}`} style={{ textDecoration: 'none' }}>
-                    <Card style={{padding: '8px', backgroundColor: 'rgb(32, 29, 72)', minWidth: '240px', color: 'white', height: '100%'}}>
+                    <Card
+                      sx={{ minWidth: { xs: 'unset', sm: '300px' } }}
+                      style={{padding: '8px', backgroundColor: 'rgb(32, 29, 72)', color: 'white', height: '100%'}}
+                    >
                       <Typography style={{ marginBottom: '8px' }}><strong>{set.name}</strong></Typography>
                       {set.boxImage && (
                       <Typography color="text.primary">
