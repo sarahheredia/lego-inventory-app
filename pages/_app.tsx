@@ -13,11 +13,14 @@ const clientSideEmotionCache = createEmotionCache();
 const { publicRuntimeConfig } = getConfig();
 
 MyApp.getInitialProps = async () => {
-  const response = await fetch(`${publicRuntimeConfig.basePath}/api/lego`);
-  const legoSets = await response.json();
+  const [legoSets, photos] = await Promise.all([
+    fetch(`${publicRuntimeConfig.basePath}/api/lego`).then(r => r.json()),
+    fetch(`${publicRuntimeConfig.basePath}/api/photos`).then(r => r.json()),
+  ]);
   return {
     pageProps: {
       legoSets,
+      photos,
     }
   };
 };
