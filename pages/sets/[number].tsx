@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import getConfig from 'next/config';
+import { useRouter } from 'next/router';
 import {
   Box,
   Breadcrumbs,
@@ -12,24 +12,16 @@ import Carousel from 'react-material-ui-carousel';
 import { LegoSet } from '../../types/LegoSet.d';
 import { PhotoRow } from '../../types/Photos.d';
 
-const { publicRuntimeConfig } = getConfig();
-
 type Props = {
   legoSets: Array<LegoSet>;
   photos: Array<PhotoRow>;
-  setNumber: number;
 };
 
-export async function getServerSideProps(ctx: any) {
-  const setNumber = ctx.query.number;
-  const response = await fetch(`${publicRuntimeConfig.basePath}/api/photos?filter=${setNumber}`);
-  const photos = await response.json();
-  return { props: { setNumber, photos } };
-}
-
-export default function SetDetails({ legoSets, photos, setNumber }: Props) {
+export default function SetDetails({ legoSets, photos }: Props) {
+  const router = useRouter();
+  const setNumber = router.query.number;
+  const setPhotos = photos.filter(p => p.for === setNumber);
   const set = legoSets.filter(set => set.number === Number(setNumber))[0];
-
   return (
     <>
       <Head>
@@ -83,7 +75,7 @@ export default function SetDetails({ legoSets, photos, setNumber }: Props) {
           )}
         </Card>
 
-        {!!photos.length && (
+        {!!setPhotos.length && (
           <Card
             style={{
               border: 'rgb(32, 29, 72) solid 24px',
@@ -96,7 +88,7 @@ export default function SetDetails({ legoSets, photos, setNumber }: Props) {
             <Typography variant="h2" gutterBottom>OUR PHOTOS</Typography>
 
             <Carousel>
-              {photos.map( (photo: PhotoRow, i: number) =>
+              {setPhotos.map( (photo: PhotoRow, i: number) =>
                 <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={photo.url} alt={`Lego Set Photo ${i}`} />
               )}
             </Carousel>

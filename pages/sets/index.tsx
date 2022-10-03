@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { groupBy, orderBy } from 'lodash';
 import Head from 'next/head';
-import getConfig from 'next/config';
 import {
   Accordion,
   AccordionDetails,
@@ -30,8 +29,6 @@ import { Clear } from '@mui/icons-material';
 import { LegoSet } from '../../types/LegoSet.d';
 import { PhotoRow } from '../../types/Photos';
 
-const { publicRuntimeConfig } = getConfig();
-
 type Props = {
   legoSets: Array<LegoSet>;
   photos: Array<PhotoRow>
@@ -41,13 +38,6 @@ type SearchableLegoSet = LegoSet & {
   photos: Array<string>;
   photoCount: number;
 };
-
-export async function getServerSideProps() {
-  const response = await fetch(`${publicRuntimeConfig.basePath}/api/photos`);
-  const photos = await response.json();
-  const photosOfSets = photos.filter((photo: PhotoRow) => !isNaN(Number(photo.for)));
-  return { props: { photos: photosOfSets } };
-}
 
 export default function SetList({ legoSets, photos }: Props) {
   const [searchText, setSearchText] = useState('');

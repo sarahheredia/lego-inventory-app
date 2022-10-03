@@ -1,6 +1,5 @@
+import React from 'react';
 import { sumBy, minBy, maxBy, countBy, groupBy } from 'lodash';
-import * as React from 'react';
-import getConfig from 'next/config';
 import Head from 'next/head';
 import {
   Box,
@@ -11,22 +10,15 @@ import {
   Typography,
 } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
-import { LegoSet } from '../types/LegoSet';
+import { LegoSet } from '../types/LegoSet.d';
+import { PhotoRow } from '../types/Photos.d';
 
 type LegoSetProps = {
   legoSets: Array<LegoSet>;
 }
 
 type Props = LegoSetProps & {
-  photos: Array<string>;
-}
-
-const { publicRuntimeConfig } = getConfig();
-
-export async function getServerSideProps() {
-  const response = await fetch(`${publicRuntimeConfig.basePath}/api/photos?filter=progress`);
-  const photos = await response.json();
-  return { props: { photos: photos.map((photo: any) => photo.url) } };
+  photos: Array<PhotoRow>;
 }
 
 const Stats = (props: LegoSetProps) => {
@@ -124,7 +116,7 @@ const Home = (props: Props) => {
 
           <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '100%'}}>
             <Carousel>
-              {props.photos.map( (url: string, i: number) =>
+              {props.photos.filter(p => p.for === 'progress').map(({url}, i: number) =>
                 <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} alt={`Lego Progress Photo ${i}`} /> )}
             </Carousel>
           </Card>
