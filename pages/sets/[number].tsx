@@ -53,7 +53,7 @@ export default function SetDetails({ legoSets, photos, setNumber }: Props) {
         </Card>
 
         <Card style={{ border: 'rgb(32, 29, 72) solid 24px', textAlign: 'center', marginTop: '24px', padding: '24px', marginBottom: '24px' }}>
-          <Typography variant="h2" gutterBottom>{set.name}</Typography>
+          <Typography variant="h2" gutterBottom style={{backgroundColor: 'rgb(32, 29, 72)', color: 'white'}}>{set.name}</Typography>
           <Box
             sx={{
               display: 'flex',
