@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   const values = await getValues('Lego Sets');
   const data: Array<LegoSet> = values!.map((row: Array<string>) => {
-    return {
+    let set: Partial<LegoSet> = {
       series: row[0],
       year: Number(row[1]),
       number: Number(row[2]),
@@ -23,6 +23,9 @@ export default async function handler(
       boxImage: row[11],
       setImage: row[12],
     };
+
+    set.searchText = `${set.name} ${set.series} ${set.number} ${set.year}`.toLowerCase();
+    return set;
   });
 
   res.status(200).json(data)

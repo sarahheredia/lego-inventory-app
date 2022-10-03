@@ -102,6 +102,19 @@ const Home = (props: Props) => {
                 They have all been sitting in a big bin for years making them nearly impossible to rebuild.
                 Fortunately we kept all of the instruction manuals so we are setting out on an adventure to rebuild all of the sets.
               </Typography>
+
+              <Typography
+                variant="h4"
+                component="a"
+                gutterBottom
+                href="/sets"
+                style={{color: 'rgb(32, 29, 72)',
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',}}
+              >
+                CHECK OUT OUR SETS!
+              </Typography>
             </CardContent>
           </Card>
 
