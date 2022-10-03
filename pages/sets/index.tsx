@@ -161,7 +161,7 @@ export default function SetList({ legoSets, photos }: Props) {
             sorted.map((set: SearchableLegoSet) => {
               return (
                 <Grid item key={set.name}
-                  sx={{ width: { xs: '100%', sm: 'unset', md: 'unset' } }}
+                  sx={{ width: { xs: '100%', sm: 'unset' } }}
                 >
                   <a href={`/sets/${set.number}`} style={{ textDecoration: 'none' }}>
                     <Card style={{padding: '8px', backgroundColor: 'rgb(32, 29, 72)', minWidth: '240px', color: 'white', height: '100%'}}>
