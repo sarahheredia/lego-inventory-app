@@ -1,8 +1,12 @@
+import { useState } from 'react';
+import { groupBy, orderBy } from 'lodash';
 import Head from 'next/head';
+import getConfig from 'next/config';
 import {
   Box,
   Breadcrumbs,
   Card,
+  Checkbox,
   Container,
   FormControl,
   FormControlLabel,
@@ -16,19 +20,36 @@ import {
   Typography,
 } from '@mui/material';
 import { LegoSet } from '../../types/LegoSet.d';
-import { useState } from 'react';
-import { orderBy, sortBy } from 'lodash';
+import { PhotoRow } from '../../types/Photos';
+
+const { publicRuntimeConfig } = getConfig();
 
 type Props = {
   legoSets: Array<LegoSet>;
+  photos: Array<{
+    for: number;
+    imageUrl: string;
+  }>
 };
 
-export default function SetList({ legoSets }: Props) {
+export async function getServerSideProps() {
+  const response = await fetch(`${publicRuntimeConfig.basePath}/api/photos`);
+  const photos = await response.json();
+  const photosOfSets = photos.filter((photo: PhotoRow) => !isNaN(Number(photo.for)));
+  return { props: { photos: photosOfSets } };
+}
+
+export default function SetList({ legoSets, photos }: Props) {
   const [searchText, setSearchText] = useState('');
   const [sort, setSort] = useState('pieces');
   const [sortDirection, setSortDirection] = useState<'asc'| 'desc'>('asc');
-  const filtered = legoSets.filter(set => set.searchText!.indexOf(searchText) > -1);
-  const sorted = orderBy(filtered, [sort], [sortDirection])
+  const [hasPhotos, setHasPhotos] = useState(false);
+  const photosGroup = groupBy(photos, photo => photo.for);
+  const filtered = legoSets.filter(set => {
+    let match = set.searchText!.indexOf(searchText) > -1;
+    return hasPhotos ? match && photosGroup[set.number.toString()] : match;
+  });
+  const sorted = orderBy(filtered, [sort], [sortDirection]);
   return (
     <>
       <Head>
@@ -53,18 +74,18 @@ export default function SetList({ legoSets }: Props) {
                 name="sorting-group"
                 onChange={event => setSort(event.target.value)}
               >
-                <FormControlLabel value="pieces" control={<Radio />} label="Pieces" checked={sort === 'pieces'} />
-                <FormControlLabel value="series" control={<Radio />} label="Series" checked={sort === 'series'} />
-                <FormControlLabel value="year" control={<Radio />} label="Year" checked={sort === 'year'} />
                 <TableSortLabel
                   active
                   direction={sortDirection}
                   onClick={() => setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')}
                 />
+                <FormControlLabel value="pieces" control={<Radio />} label="Pieces" checked={sort === 'pieces'} />
+                <FormControlLabel value="series" control={<Radio />} label="Series" checked={sort === 'series'} />
+                <FormControlLabel value="year" control={<Radio />} label="Year" checked={sort === 'year'} />
+                <FormControlLabel control={<Checkbox checked={hasPhotos} onChange={() => setHasPhotos(!hasPhotos)} />} label="Has Photos" />
               </RadioGroup>
             </FormControl>
-
-            <TextField label="Search" variant="outlined" onChange={(event) => setSearchText(event.target.value.toLowerCase())} style={{width: '300px'}} />
+            <TextField label={`Search ${sorted.length} sets...`} variant="outlined" onChange={(event) => setSearchText(event.target.value.toLowerCase())} style={{width: '300px'}} />
           </Box>
 
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="center">
@@ -86,6 +107,7 @@ export default function SetList({ legoSets }: Props) {
                       <Typography>Released: <strong>{set.year}</strong></Typography>
                       <Typography>Pieces: <strong>{set.pieces}</strong></Typography>
                       <Typography>Minifigs: <strong>{set.minifigs}</strong></Typography>
+                      <Typography>Num Photos: <strong>{Object.values(photosGroup[set.number.toString()] ?? {})?.length}</strong></Typography>
                     </Card>
                   </a>
                 </Grid>

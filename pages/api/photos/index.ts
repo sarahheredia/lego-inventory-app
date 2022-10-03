@@ -1,25 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getValues } from '../../../libs/googleSheets';
-
-type PhotoRow = {
-  type: string;
-  url: string;
-};
+import { PhotoRow } from '../../../types/Photos.d';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Array<string>>
+  res: NextApiResponse<Array<PhotoRow>>
 ) {
-  const filter = req.query.filter as string;
+  const filter = req.query.filter as string || '';
   const values = await getValues('Photos');
-  const data: Array<string> = values.map((row: Array<PhotoRow>) => {
+  const data: Array<PhotoRow> = values.map((row: Array<PhotoRow>) => {
     return {
-      type: row[0],
+      for: row[0],
       url: row[1]
     }
   }).filter((row: PhotoRow) => {
-    return row.type.toLowerCase() === filter.toLowerCase();
-  }).map((row: PhotoRow) => row.url);
+    return filter ? row.for.toLowerCase() === filter.toLowerCase() : true;
+  });
 
   res.status(200).json(data)
 }

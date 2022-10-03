@@ -26,7 +26,7 @@ const { publicRuntimeConfig } = getConfig();
 export async function getServerSideProps() {
   const response = await fetch(`${publicRuntimeConfig.basePath}/api/photos?filter=progress`);
   const photos = await response.json();
-  return { props: { photos } };
+  return { props: { photos: photos.map((photo: any) => photo.url) } };
 }
 
 const Stats = (props: LegoSetProps) => {
@@ -122,7 +122,8 @@ const Home = (props: Props) => {
 
           <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '100%'}}>
             <Carousel>
-              {props.photos.map( (url: string, i: number) => <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} alt={`Lego Progress Photo ${i}`} /> )}
+              {props.photos.map( (url: string, i: number) =>
+                <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} alt={`Lego Progress Photo ${i}`} /> )}
             </Carousel>
           </Card>
         </Box>
