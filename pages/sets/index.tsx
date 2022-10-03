@@ -16,6 +16,8 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
+  IconButton,
+  InputAdornment,
   Link,
   Radio,
   RadioGroup,
@@ -24,6 +26,7 @@ import {
   Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Clear } from '@mui/icons-material';
 import { LegoSet } from '../../types/LegoSet.d';
 import { PhotoRow } from '../../types/Photos';
 
@@ -114,6 +117,16 @@ export default function SetList({ legoSets, photos }: Props) {
                   variant="outlined"
                   onChange={(event) => setSearchText(event.target.value.toLowerCase())}
                   style={{marginBottom: '12px', marginTop: '12px', width: '100%'}}
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton edge="end" onClick={() => setSearchText('')}>
+                        <InputAdornment position="start">
+                          <Clear />
+                        </InputAdornment>
+                      </IconButton>
+                    ),
+                  }}
+                  value={searchText}
                 />
                 <Autocomplete
                   disablePortal
