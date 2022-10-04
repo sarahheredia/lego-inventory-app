@@ -25,7 +25,7 @@ export default function MyApp(props: MyAppProps) {
       fetch(`/api/lego`).then(r => r.json()),
       fetch(`/api/photos`).then(r => r.json()),
     ]).then(([ls, p]) => {
-      // setLegoSets(ls);
+      setLegoSets(ls);
       setPhotos(p);
     });
   }, []);
