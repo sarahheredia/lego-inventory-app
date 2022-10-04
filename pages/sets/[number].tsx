@@ -86,8 +86,7 @@ export default function SetDetails({ legoSets, photos }: Props) {
               marginRight: 'auto',
             }}
           >
-            <Typography variant="h2" gutterBottom>OUR PHOTOS</Typography>
-
+            <Typography variant="h2" gutterBottom>OUR PHOTOS OF THIS SET</Typography>
             {!!setPhotos.length && (
               <PhotoCarousel photos={setPhotos} />
             )}

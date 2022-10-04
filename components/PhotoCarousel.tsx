@@ -31,6 +31,8 @@ export default function Photos({photos}: {photos:  Array<PhotoRow>}) {
               <Box
                 component="img"
                 sx={{
+                  maxHeight: 400,
+                  objectFit: 'contain',
                   display: 'block',
                   overflow: 'hidden',
                   width: '100%',
