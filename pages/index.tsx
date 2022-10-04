@@ -72,6 +72,7 @@ const Stats = (props: LegoSetProps) => {
         index={activeStep}
         onChangeIndex={(step: number) => setActiveStep(step)}
         enableMouseEvents
+        interval={5000}
       >
         {stats.map(({name, value}, index) => (
           <div key={`${name}-${index}`}>
