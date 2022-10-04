@@ -3,18 +3,16 @@ import { sumBy, minBy, maxBy, countBy, groupBy } from 'lodash';
 import Head from 'next/head';
 import {
   Box,
-  Button,
   Card,
   CardContent,
   Container,
-  MobileStepper,
   Paper,
   Typography,
 } from '@mui/material';
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { useTheme } from '@mui/material/styles';
+import PhotoCarousel from '../components/PhotoCarousel';
 import { LegoSet } from '../types/LegoSet.d';
 import { PhotoRow } from '../types/Photos.d';
 
@@ -92,72 +90,6 @@ const Stats = (props: LegoSetProps) => {
   );
 }
 
-const Photos = (({photos}: {photos:  Array<PhotoRow>}) => {
-  const [activeStep, setActiveStep] = React.useState(0);
-  const theme = useTheme();
-  const maxSteps = photos.length;
-  return (
-    <Container style={{paddingRight: 0, paddingLeft: 0}}>
-      <Card style={{ border: 'rgb(32, 29, 72) solid 24px' }}>
-        <AutoPlaySwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={activeStep}
-          onChangeIndex={(step: number) => setActiveStep(step)}
-          enableMouseEvents
-          animateHeight
-        >
-          {photos.filter(p => p.for === 'progress').map((step, index) => (
-            <div key={`${step.url}-${index}`}>
-              {Math.abs(activeStep - index) <= 2 ? (
-                <Box
-                  component="img"
-                  sx={{
-                    display: 'block',
-                    overflow: 'hidden',
-                    width: '100%',
-                  }}
-                  src={step.url}
-                  alt={`Lego Progress Photo ${index}`}
-                />
-              ) : null}
-            </div>
-          ))}
-        </AutoPlaySwipeableViews>
-        <MobileStepper
-          variant="progress"
-          steps={maxSteps}
-          position="static"
-          activeStep={activeStep}
-          nextButton={
-            <Button
-              size="small"
-              onClick={() => setActiveStep((prevActiveStep) => prevActiveStep + 1)}
-              disabled={activeStep === maxSteps - 1}
-            >
-              Next
-              {theme.direction === 'rtl' ? (
-                <KeyboardArrowLeft />
-              ) : (
-                <KeyboardArrowRight />
-              )}
-            </Button>
-          }
-          backButton={
-            <Button size="small" onClick={() => setActiveStep((prevActiveStep) => prevActiveStep - 1)} disabled={activeStep === 0}>
-              {theme.direction === 'rtl' ? (
-                <KeyboardArrowRight />
-              ) : (
-                <KeyboardArrowLeft />
-              )}
-              Back
-            </Button>
-          }
-        />
-      </Card>
-    </Container>
-  );
-});
-
 const Home = ({ legoSets, photos }: Props) => {
   return (
     <>
@@ -199,7 +131,11 @@ const Home = ({ legoSets, photos }: Props) => {
 
           <Stats legoSets={legoSets} />
 
-          <Photos photos={photos} />
+          <Container style={{paddingRight: 0, paddingLeft: 0}}>
+            <Card style={{ border: 'rgb(32, 29, 72) solid 24px' }}>
+              <PhotoCarousel photos={photos.filter(p => p.for === 'progress')} />
+            </Card>
+          </Container>
         </Box>
       </Container>
     </>
