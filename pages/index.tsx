@@ -111,9 +111,7 @@ const Photos = (({photos}: {photos:  Array<PhotoRow>}) => {
                 <Box
                   component="img"
                   sx={{
-                    // height: 255,
                     display: 'block',
-                    // maxWidth: '50%',
                     overflow: 'hidden',
                     width: '100%',
                   }}
