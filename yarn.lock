@@ -252,6 +252,13 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@material-ui/types@^4.0.0":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/types/-/types-4.1.1.tgz#b65e002d926089970a3271213a3ad7a21b17f02b"
+  integrity sha512-AN+GZNXytX9yxGi0JOfxHrRTbhFybjUJ05rnsBVjcB+16e466Z0Xe5IxawuOayVZgTBNDxmPKo5j4V6OnMtaSQ==
+  dependencies:
+    "@types/react" "*"
+
 "@mui/base@5.0.0-alpha.99":
   version "5.0.0-alpha.99"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.99.tgz#52589c72b6bf69e016e5811292529d60f81537ad"
@@ -510,7 +517,16 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-swipeable-views@^0.13.1":
+"@types/react-swipeable-views-utils@^0.13.4":
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/@types/react-swipeable-views-utils/-/react-swipeable-views-utils-0.13.4.tgz#2a48da267b48467887b146178673f4020dec5b1e"
+  integrity sha512-v0nDk6mMIPAu/kaEnqQpDz2Z7O8ewqy2in7xwobcAAkUKKsdw3MSWFW1BkQ+dPgTrBnj/KXUzx3ZIS6UYviwyA==
+  dependencies:
+    "@material-ui/types" "^4.0.0"
+    "@types/react" "*"
+    "@types/react-swipeable-views" "*"
+
+"@types/react-swipeable-views@*", "@types/react-swipeable-views@^0.13.1":
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/@types/react-swipeable-views/-/react-swipeable-views-0.13.1.tgz#381c8513deef5426623aa851033ff4f4831ae15c"
   integrity sha512-Nuvywkv9CkwcUgItOCBszkc/pc8YSdiKV5E1AzOJ/p32Db50LgwhJFi5b1ANPgyWxB0Q5yn69aMURHyGi3MLyg==
