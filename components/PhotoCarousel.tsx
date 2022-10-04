@@ -24,6 +24,7 @@ export default function Photos({photos}: {photos:  Array<PhotoRow>}) {
         onChangeIndex={(step: number) => setActiveStep(step)}
         enableMouseEvents
         animateHeight
+        interval={5000}
       >
         {photos.map((step, index) => (
           <div key={`${step.url}-${index}`}>
