@@ -8,7 +8,7 @@ import {
   Link,
   Typography,
 } from '@mui/material';
-import Carousel from 'react-material-ui-carousel';
+import PhotoCarousel from '../../components/PhotoCarousel';
 import { LegoSet } from '../../types/LegoSet.d';
 import { PhotoRow } from '../../types/Photos.d';
 
@@ -21,6 +21,7 @@ export default function SetDetails({ legoSets, photos }: Props) {
   const router = useRouter();
   const setNumber = router.query.number;
   const setPhotos = photos.filter(p => p.for === setNumber);
+  console.log(setPhotos);
   const set = legoSets.filter(set => set.number === Number(setNumber))[0];
   return (
     <>
@@ -85,13 +86,10 @@ export default function SetDetails({ legoSets, photos }: Props) {
               marginRight: 'auto',
             }}
           >
-            <Typography variant="h2" gutterBottom>OUR PHOTOS</Typography>
-
-            <Carousel>
-              {setPhotos.map( (photo: PhotoRow, i: number) =>
-                <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={photo.url} alt={`Lego Set Photo ${i}`} />
-              )}
-            </Carousel>
+            <Typography variant="h2" gutterBottom>OUR PHOTOS OF THIS SET</Typography>
+            {!!setPhotos.length && (
+              <PhotoCarousel photos={setPhotos} />
+            )}
           </Card>
         )}
       </Container>

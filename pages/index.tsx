@@ -9,9 +9,14 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import Carousel from 'react-material-ui-carousel';
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
+import { useTheme } from '@mui/material/styles';
+import PhotoCarousel from '../components/PhotoCarousel';
 import { LegoSet } from '../types/LegoSet.d';
 import { PhotoRow } from '../types/Photos.d';
+
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 type LegoSetProps = {
   legoSets: Array<LegoSet>;
@@ -22,6 +27,8 @@ type Props = LegoSetProps & {
 }
 
 const Stats = (props: LegoSetProps) => {
+  const [activeStep, setActiveStep] = React.useState(0);
+  const theme = useTheme();
   const legoSets = props.legoSets;
   const bagged = sumBy(legoSets, set => +set.bagged);
   const completed = sumBy(legoSets, set => +set.complete);
@@ -32,12 +39,25 @@ const Stats = (props: LegoSetProps) => {
     return countBy(legoSets, set =>
       set.pieces > min && set.pieces <= max)
     .true;
-  }
-
+  };
+  const stats = [
+    { name: 'Total Sets', value: legoSets.length },
+    { name: 'Total Series', value: Object.keys(groupBy(legoSets, (set: LegoSet) => set.series)).length },
+    { name: 'Total Pieces from all Sets Combined', value: sumBy(legoSets, set => set.pieces) },
+    { name: 'Total Minifigs', value: sumBy(legoSets, set => set.minifigs) },
+    { name: 'Sets Partially Reassembled', value: bagged },
+    { name: 'Sets Completely Reassembled', value: completed },
+    { name: 'Sets to Reassemble', value: legoSets.length - completed },
+    { name: 'Smallest Piece Count', value: fewest.pieces },
+    { name: 'Largest Piece Count', value: most.pieces },
+    ...(pieceCount.map((pieces, index, arr) => {
+      return { name: `Sets with less than ${pieces} pieces`, value: getCountByPieces(arr[index-1] ?? 0, pieces)}
+    }))
+  ];
   return (
     <Container
       component={Paper}
-      style={{ border: 'rgb(32, 29, 72) solid 24px', marginBottom: '24px'}}
+      style={{ border: 'rgb(32, 29, 72) solid 24px', marginBottom: '24px', paddingBottom: '24px', paddingRight: 0, paddingLeft: 0}}
     >
       <CardContent>
         <Typography variant="h4" component="h4" gutterBottom style={{textAlign: 'center'}}>
@@ -45,35 +65,32 @@ const Stats = (props: LegoSetProps) => {
         </Typography>
       </CardContent>
 
-      <Carousel>
-        {[
-          { name: 'Total Sets', value: legoSets.length },
-          { name: 'Total Series', value: Object.keys(groupBy(legoSets, (set: LegoSet) => set.series)).length },
-          { name: 'Total Pieces from all Sets Combined', value: sumBy(legoSets, set => set.pieces) },
-          { name: 'Total Minifigs', value: sumBy(legoSets, set => set.minifigs) },
-          { name: 'Sets Partially Reassembled', value: bagged },
-          { name: 'Sets Completely Reassembled', value: completed },
-          { name: 'Sets to Reassemble', value: legoSets.length - completed },
-          { name: 'Smallest Piece Count', value: fewest.pieces },
-          { name: 'Larged Piece Count', value: most.pieces },
-          ...(pieceCount.map((pieces, index, arr) => {
-            return { name: `Sets with less than ${pieces} pieces`, value: getCountByPieces(arr[index-1] ?? 0, pieces)}
-          }))
-        ].map(({name, value}) => (
-          <Box
-            key={name}
-            sx={{display: 'flex', flexDirection: 'column', textAlign: 'center'}}
-          >
-            {name}
-            <strong>{value}</strong>
-          </Box>
+      <AutoPlaySwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={activeStep}
+        onChangeIndex={(step: number) => setActiveStep(step)}
+        enableMouseEvents
+        interval={5000}
+      >
+        {stats.map(({name, value}, index) => (
+          <div key={`${name}-${index}`}>
+            {Math.abs(activeStep - index) <= 2 ? (
+              <Box
+                key={name}
+                sx={{display: 'flex', flexDirection: 'column', textAlign: 'center'}}
+              >
+                {name}
+                <strong>{value}</strong>
+              </Box>
+            ) : null}
+          </div>
         ))}
-      </Carousel>
+      </AutoPlaySwipeableViews>
     </Container>
   );
 }
 
-const Home = (props: Props) => {
+const Home = ({ legoSets, photos }: Props) => {
   return (
     <>
       <Head>
@@ -112,14 +129,13 @@ const Home = (props: Props) => {
             </CardContent>
           </Card>
 
-          <Stats legoSets={props.legoSets} />
+          <Stats legoSets={legoSets} />
 
-          <Card style={{ border: 'rgb(32, 29, 72) solid 24px', width: '100%'}}>
-            <Carousel>
-              {props.photos.filter(p => p.for === 'progress').map(({url}, i: number) =>
-                <img referrerPolicy="no-referrer" style={{width: '100%'}} key={i} src={url} alt={`Lego Progress Photo ${i}`} /> )}
-            </Carousel>
-          </Card>
+          <Container style={{paddingRight: 0, paddingLeft: 0}}>
+            <Card style={{ border: 'rgb(32, 29, 72) solid 24px' }}>
+              <PhotoCarousel photos={photos.filter(p => p.for === 'progress')} />
+            </Card>
+          </Container>
         </Box>
       </Container>
     </>
