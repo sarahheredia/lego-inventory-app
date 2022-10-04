@@ -196,15 +196,9 @@ const Home = ({ legoSets, photos }: Props) => {
             </CardContent>
           </Card>
 
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            sx={{ width: '100%', flexDirection: { xs: 'column', sm: 'column', md: 'row' } }}
-          >
-            <Stats legoSets={legoSets} />
+          <Stats legoSets={legoSets} />
 
-            <Photos photos={photos} />
-          </Box>
+          <Photos photos={photos} />
         </Box>
       </Container>
     </>
