@@ -26,22 +26,6 @@ const Header = () => {
             />
           </a>
         </IconButton>
-
-        <Typography
-          variant="h6"
-          noWrap
-          component="a"
-          href="/sets"
-          sx={{
-            mr: 2,
-            display: 'flex',
-            fontFamily: 'monospace',
-            fontWeight: 700,
-            letterSpacing: '.3rem',
-            color: 'inherit',
-            textDecoration: 'none',
-          }}
-        >SETS</Typography>
       </Toolbar>
     </AppBar>
   );
