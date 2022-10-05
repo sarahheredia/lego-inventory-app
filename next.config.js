@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   serverRuntimeConfig: {
     googleServiceKey: process.env.GOOGLE_SERVICE_KEY,
