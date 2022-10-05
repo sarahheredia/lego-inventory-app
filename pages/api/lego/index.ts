@@ -2,27 +2,28 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { getValues } from '../../../libs/googleSheets';
 import { LegoSet } from '../../../types/LegoSet.d';
 
+const fieldTypeConversion = {
+  year: (v: string) => Number(v),
+  number: (v: string) => Number(v),
+  numInstructionManuals: (v: string) => Number(v),
+  pieces: (v: string) => Number(v),
+  minifigs: (v: string) => Number(v),
+  bagged: (v: string) => v === 'TRUE',
+  displayed: (v: string) => v === 'TRUE',
+  complete: (v: string) => v === 'TRUE',
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Array<LegoSet>>
 ) {
-  const values = await getValues('Lego Sets');
-  const data: Array<LegoSet> = values!.map((row: Array<string>) => {
-    let set: Partial<LegoSet> = {
-      series: row[0],
-      year: Number(row[1]),
-      number: Number(row[2]),
-      numInstructionManuals: Number(row[3]),
-      name: row[4],
-      pieces: Number(row[5]),
-      minifigs: Number(row[6]),
-      bagged: row[7]==='TRUE',
-      displayed: row[8]==='TRUE',
-      complete: row[9]==='TRUE',
-      notes: row[10],
-      boxImage: row[11],
-      setImage: row[12],
-    };
+  const values= await getValues('Lego Sets');
+  const data: Array<LegoSet> = values.slice(1, values.length+1)!.map((row: Array<string>) => {
+    const set: Partial<LegoSet> = {};
+    values[0].forEach((k: string, i: number) => {
+      // @ts-ignore
+      set[k] = fieldTypeConversion[k]?.(row[i]) ?? row[i]
+    });
 
     set.searchText = `${set.name} ${set.series} ${set.number} ${set.year}`.toLowerCase();
     return set;
