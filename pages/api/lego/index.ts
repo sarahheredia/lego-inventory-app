@@ -25,7 +25,7 @@ export default async function handler(
       set[k] = fieldTypeConversion[k]?.(row[i]) ?? row[i]
     });
 
-    set.searchText = `${set.name} ${set.series} ${set.number} ${set.year}`.toLowerCase();
+    set.searchText = `${set.name} ${set.series} ${set.number} ${set.year} complete=${set.complete} bagged=${set.bagged} displayed=${set.displayed}`.toLowerCase();
     return set;
   });
 
