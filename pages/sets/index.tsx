@@ -59,7 +59,6 @@ export default function SetList({ legoSets, photos }: Props) {
   });
   const filtered = legoSetsWithPhotos.filter(set => {
     const matchesSearch = searchText.split(' ').every(st => {
-      console.log('st', st);
       return set.searchText.indexOf(st) > -1;
     });
     const isComplete = areComplete ? set.complete : true;
