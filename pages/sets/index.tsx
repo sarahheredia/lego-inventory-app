@@ -193,6 +193,7 @@ export default function SetList({ legoSets, photos }: Props) {
                       <Typography color="text.primary">
                         <img referrerPolicy="no-referrer" style={{height: '160px'}} src={set.boxImage} alt={`Box image for set ${set.number}`} />
                       </Typography>)}
+
                       <Box>
                         <Tooltip title={set.complete ? 'Complete' : 'Not Complete'}>
                           <IconButton>
