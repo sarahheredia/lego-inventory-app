@@ -8,10 +8,9 @@ import {
   Container,
   IconButton,
   Link,
-  Tooltip,
   Typography,
 } from '@mui/material';
-import { CheckCircle, Inventory, Photo }from '@mui/icons-material';
+import { CheckCircle, Cancel }from '@mui/icons-material';
 import PhotoCarousel from '../../components/PhotoCarousel';
 import { LegoSet } from '../../types/LegoSet.d';
 import { PhotoRow } from '../../types/Photos.d';
@@ -88,24 +87,35 @@ export default function SetDetails({ legoSets, photos }: Props) {
             )}
           </Box>
 
-          <Box>
-            <Tooltip title={set.complete ? 'Complete' : 'Not Complete'}>
-              <IconButton>
-                <CheckCircle color={set.complete ? 'success' : 'error'} />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title={set.bagged ? 'In Bag' : 'Not In Bag'}>
-              <IconButton>
-                <Inventory color={set.bagged ? 'success' : 'error'} />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title={photoCount > 0 ? `Has ${photoCount} Photo${photoCount}` : `No Photo${photoCount == 1 ? '' : 's'}`}>
+          <Box display="flex" flexDirection="column" alignItems="center">
+            <Box display="flex" alignItems="center">
+              <Typography variant="h4">Completed:</Typography>
+                <IconButton>
+                  {set.complete ? (
+                    <CheckCircle color="success" />
+                  ) : <Cancel color="error" />}
+                </IconButton>
+            </Box>
+
+            <Box display="flex" alignItems="center">
+              <Typography variant="h4">Bagged:</Typography>
+                <IconButton>
+                {set.bagged ? (
+                    <CheckCircle color="success" />
+                  ) : <Cancel color="error" />}
+                </IconButton>
+            </Box>
+
+            <Box display="flex" alignItems="center">
+              <Typography variant="h4">Photo Count:</Typography>
               <IconButton>
                 <Badge badgeContent={photoCount} color="primary">
-                  <Photo color={photoCount ? 'success' : 'error'} />
+                  {photoCount > 0 ? (
+                    <CheckCircle color="success" />
+                  ) : <Cancel color="error" />}
                 </Badge>
               </IconButton>
-            </Tooltip>
+            </Box>
           </Box>
           {set.notes && (
             <Typography variant="h5" gutterBottom>Notes: <strong>{set.notes}</strong></Typography>
