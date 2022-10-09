@@ -6,6 +6,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Autocomplete,
+  Badge,
   Box,
   Breadcrumbs,
   Card,
@@ -22,9 +23,10 @@ import {
   RadioGroup,
   TableSortLabel,
   TextField,
+  Tooltip,
   Typography,
 } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { ExpandMore, CheckCircle, Inventory, Photo }from '@mui/icons-material';
 import { Clear } from '@mui/icons-material';
 import { LegoSet } from '../../types/LegoSet.d';
 import { PhotoRow } from '../../types/Photos';
@@ -90,7 +92,7 @@ export default function SetList({ legoSets, photos }: Props) {
               style={{backgroundColor: 'rgb(32, 29, 72)', color: 'white', marginBottom: '24px', marginLeft: '12px', marginRight: '12px'}}
             >
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon style={{color: 'white'}} />}
+              expandIcon={<ExpandMore style={{color: 'white'}} />}
             >
               <Typography>Search, sort, and filter...</Typography>
             </AccordionSummary>
@@ -184,18 +186,33 @@ export default function SetList({ legoSets, photos }: Props) {
                   <a href={`/sets/${set.number}`} style={{ textDecoration: 'none' }}>
                     <Card style={{padding: '8px', backgroundColor: 'rgb(32, 29, 72)', color: 'white', height: '100%'}}>
                       <Typography sx={{fontFamily: 'Monospace'}}><strong>{set.name}</strong></Typography>
-                      <Typography sx={{fontWeight: 'light'}} variant="subtitle2" style={{ marginBottom: '8px' }}>{set.series}</Typography>
+                      <Typography sx={{fontWeight: 'light'}} variant="subtitle2">{set.number} &#x2022; {set.series} &#x2022; {set.year}</Typography>
+                      <Typography variant="subtitle2" sx={{ marginBottom: '8px' }}>{set.pieces} pieces &#x2022; {set.minifigs} Minifigs</Typography>
+
                       {set.boxImage && (
                       <Typography color="text.primary">
                         <img referrerPolicy="no-referrer" style={{height: '160px'}} src={set.boxImage} alt={`Box image for set ${set.number}`} />
                       </Typography>)}
-                      <Typography>Number: <strong>{set.number}</strong></Typography>
-                      <Typography>Released: <strong>{set.year}</strong></Typography>
-                      <Typography>Pieces: <strong>{set.pieces}</strong></Typography>
-                      <Typography>Complete: <strong>{set.complete ? 'Yes' : 'No'}</strong></Typography>
-                      <Typography>Bagged: <strong>{set.bagged ? 'Yes' : 'No'}</strong></Typography>
-                      <Typography>Minifigs: <strong>{set.minifigs}</strong></Typography>
-                      <Typography>Photos: <strong>{set.photoCount}</strong></Typography>
+
+                      <Box>
+                        <Tooltip title={set.complete ? 'Complete' : 'Not Complete'}>
+                          <IconButton>
+                            <CheckCircle color={set.complete ? 'success' : 'error'} />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title={set.bagged ? 'In Bag' : 'Not In Bag'}>
+                          <IconButton>
+                            <Inventory color={set.bagged ? 'success' : 'error'} />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title={set.photoCount > 0 ? `Has ${set.photoCount} Photo${set.photoCount == 1 ? '' : 's'}` : `No Photo${set.photoCount == 1 ? '' : 's'}`}>
+                          <IconButton>
+                            <Badge badgeContent={set.photoCount} color="primary">
+                              <Photo color={set.photoCount > 0 ? 'success' : 'error'} />
+                            </Badge>
+                          </IconButton>
+                        </Tooltip>
+                      </Box>
                     </Card>
                   </a>
                 </Grid>
