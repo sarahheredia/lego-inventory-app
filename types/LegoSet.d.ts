@@ -13,4 +13,16 @@ export type LegoSet = {
   boxImage: string;
   setImage: string;
   searchText: string;
+  missingParts: Array<MissingPart>;
+}
+
+type MissingPart = {
+  setNumber: number;
+  partNumber: number;
+  color: string;
+  description: string;
+  quantityMissing: number;
+  instructionManualPage: number;
+  notes?: string;
+  partImage: string;
 }

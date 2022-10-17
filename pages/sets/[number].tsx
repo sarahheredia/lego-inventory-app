@@ -63,11 +63,12 @@ export default function SetDetails({ legoSets, photos }: Props) {
           <Box sx={{fontWeight: 'light', border: 'solid rgb(32, 29, 72) 4px', marginBottom: '24px'}}>
             <Typography
               sx={{
+                display: 'flex',
                 typography: { sm: 'h5', xs: 'h5', md: 'h3' },
               }}
             >
-              <div>{set.pieces} pieces &#x2022; {set.minifigs} Minifigs</div>
-              <div>{set.number} &#x2022; {set.series} &#x2022; {set.year}</div>
+              <>{set.pieces} pieces &#x2022; {set.minifigs} Minifigs</>
+              <>{set.number} &#x2022; {set.series} &#x2022; {set.year}</>
             </Typography>
           </Box>
 
@@ -133,11 +134,28 @@ export default function SetDetails({ legoSets, photos }: Props) {
             }}
           >
             <Typography variant="h2" gutterBottom>OUR PHOTOS OF THIS SET</Typography>
-            {!!setPhotos.length && (
-              <PhotoCarousel photos={setPhotos} />
-            )}
+            <PhotoCarousel photos={setPhotos} />
           </Card>
         )}
+
+        {!!set.missingParts.length && (
+          <Card
+            style={{
+              border: 'rgb(32, 29, 72) solid 24px',
+              textAlign: 'center',
+              marginBottom: '24px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
+            <Typography variant="h2" gutterBottom>MISSING PARTS</Typography>
+            <PhotoCarousel photos={set.missingParts.map(part => ({
+                for: part.setNumber.toString(),
+                url: part.partImage,
+              }))}
+            />
+          </Card>
+        )} */}
       </Container>
     </>
   )
