@@ -6,11 +6,13 @@ import {
   Breadcrumbs,
   Card,
   Container,
+  Grid,
   IconButton,
   Link,
+  Tooltip,
   Typography,
 } from '@mui/material';
-import { CheckCircle, Cancel }from '@mui/icons-material';
+import { CheckCircle, Cancel, Note }from '@mui/icons-material';
 import PhotoCarousel from '../../components/PhotoCarousel';
 import { LegoSet } from '../../types/LegoSet.d';
 import { PhotoRow } from '../../types/Photos.d';
@@ -63,11 +65,12 @@ export default function SetDetails({ legoSets, photos }: Props) {
           <Box sx={{fontWeight: 'light', border: 'solid rgb(32, 29, 72) 4px', marginBottom: '24px'}}>
             <Typography
               sx={{
+                display: 'flex',
                 typography: { sm: 'h5', xs: 'h5', md: 'h3' },
               }}
             >
-              <div>{set.pieces} pieces &#x2022; {set.minifigs} Minifigs</div>
-              <div>{set.number} &#x2022; {set.series} &#x2022; {set.year}</div>
+              <>{set.pieces} pieces &#x2022; {set.minifigs} Minifigs</>
+              <>{set.number} &#x2022; {set.series} &#x2022; {set.year}</>
             </Typography>
           </Box>
 
@@ -130,12 +133,66 @@ export default function SetDetails({ legoSets, photos }: Props) {
               marginBottom: '24px',
               marginLeft: 'auto',
               marginRight: 'auto',
+              paddingTop: '24px',
             }}
           >
             <Typography variant="h2" gutterBottom>OUR PHOTOS OF THIS SET</Typography>
-            {!!setPhotos.length && (
-              <PhotoCarousel photos={setPhotos} />
-            )}
+            <PhotoCarousel photos={setPhotos} />
+          </Card>
+        )}
+
+        {!!set.missingParts?.length && (
+          <Card
+            style={{
+              border: 'rgb(32, 29, 72) solid 24px',
+              textAlign: 'center',
+              marginBottom: '24px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              paddingTop: '24px',
+              paddingBottom: '24px',
+            }}
+          >
+            <Typography variant="h2" gutterBottom>MISSING PARTS</Typography>
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="center">
+              {set.missingParts.map((part) => (
+                <Grid item key={part.partNumber}>
+                  <Card
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexDirection: 'column',
+                      padding: '8px',
+                      backgroundColor: 'rgb(32, 29, 72)',
+                      color: 'white',
+                      height: '100%',
+                    }}
+                  >
+                    <Box
+                      component="img"
+                      sx={{
+                        objectFit: 'contain',
+                        display: 'block',
+                        overflow: 'hidden',
+                        height: 100,
+                        margin: '8px',
+                      }}
+                      src={part.partImage}
+                      alt={`Lego Missing Part Photo ${part.partNumber}`}
+                      referrerPolicy="no-referrer"
+                    />
+                    <Typography>Quantity: {part.quantityMissing}</Typography>
+                    <Typography>Page: {part.instructionManualPage}</Typography>
+                    {part.notes && (
+                      <Tooltip title={part.notes}>
+                        <Note />
+                      </Tooltip>
+                    )}
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
           </Card>
         )}
       </Container>
