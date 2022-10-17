@@ -155,7 +155,7 @@ export default function SetDetails({ legoSets, photos }: Props) {
               }))}
             />
           </Card>
-        )} */}
+        )}
       </Container>
     </>
   )
