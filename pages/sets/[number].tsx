@@ -167,7 +167,6 @@ export default function SetDetails({ legoSets, photos }: Props) {
                       backgroundColor: 'rgb(32, 29, 72)',
                       color: 'white',
                       height: '100%',
-                      maxWidth: '150px',
                     }}
                   >
                     <Box
