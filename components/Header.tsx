@@ -1,10 +1,9 @@
-import * as React from 'react';
-import Image from 'next/image';
+'use client';
+import Image from "next/image";
 import {
   AppBar,
   Toolbar,
   IconButton,
-  Typography,
 } from '@mui/material';
 
 const Header = () => {
@@ -19,8 +18,8 @@ const Header = () => {
           >
           <a href="/">
             <Image
-              height="55px"
-              width="55px"
+              height={55}
+              width={55}
               src="/lego-logo.png"
               alt="Lego Logo"
             />
