@@ -1,10 +1,7 @@
-import getConfig from 'next/config';
 import { google } from 'googleapis';
 
-const { serverRuntimeConfig } = getConfig();
-
 const credentials = JSON.parse(
-  Buffer.from(serverRuntimeConfig.googleServiceKey, "base64").toString()
+  Buffer.from(process.env.GOOGLE_SERVICE_KEY as string, "base64").toString()
 );
 const auth = new google.auth.GoogleAuth({
   credentials,
@@ -22,7 +19,7 @@ export async function getValues(range: string): Promise<any> {
   const spreadsheets = await getSheetsClient();
   const response = await spreadsheets.values.get({
     auth,
-    spreadsheetId: serverRuntimeConfig.spreadsheetId,
+    spreadsheetId: process.env.SPREADSHEET_ID,
     range,
   });
   return response.data.values;
